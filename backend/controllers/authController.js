@@ -80,4 +80,17 @@ const login =  async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+
+
+//db["users"].find({},{ id_: 1,displayName : 1,email : 1})
+const getUsers = async (req,res) => {
+    try {
+        const user = await User.find({},{ id_: 1,displayName : 1})
+        res.status(200).json(user);
+    }catch(error){
+        res.status(500).json({message : 'Error retriving user'})
+    }
+
+
+}
+module.exports = { register, login,getUsers };
