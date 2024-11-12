@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
-
+//register 
 const register = async (req, res) => {
     try {
         const {displayName, email, password} = req.body
@@ -38,7 +38,7 @@ const register = async (req, res) => {
         res.status(500).send("Internal server error");
     }
 }
-
+//login
 const login =  async (req, res) => {
     try {
         const {email, password} = req.body
@@ -82,7 +82,8 @@ const login =  async (req, res) => {
 
 
 
-//db["users"].find({},{ id_: 1,displayName : 1,email : 1})
+//so I'm not sure about this one 
+//it get's the username of all the users so that I can use it for project creation, I'm unsure if that poor practise or not the api does not expose the password 
 const getUsers = async (req,res) => {
     try {
         const user = await User.find({},{ id_: 1,displayName : 1})

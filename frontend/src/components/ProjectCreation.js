@@ -13,12 +13,14 @@ const ProjectCreation = () => {
     const [description, setDescription] = useState("");
     const [type, setType] = useState("");
     const [message, setMessage] = useState("")
-    const  [usernames,setUsernames] = useState({_id: '', displayName: '' })
+    const [usernames, setUsernames] = useState([]);
+    const defaultId = "672eeba65175d6d1c26aee0e"
 
+    //functionality of the back button that returns the user to the overview screen 
     const Back = () =>{
         navigate('/ProjectOverview')
     }
-
+    //handles the form submission for creating a project 
     const handleSubmit = async(e) => {
         e.preventDefault();
         try{
@@ -50,15 +52,22 @@ const ProjectCreation = () => {
         fetchUsername()
     },[])
 
+//changes the new project's id and lead name to a valid user
+const setAsLead = (id,displayName) => {
+    console.log(displayName)
+    setLead(displayName)
+    setuserId(id)
+
 
     
+}
     
     
     
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form class="center" onSubmit={handleSubmit}>
     
     
     <div>Creation</div>
@@ -81,6 +90,7 @@ const ProjectCreation = () => {
         value={lead} 
         onChange={(e) => setLead(e.target.value)} 
         required
+        readOnly
     />
         
 
@@ -103,7 +113,18 @@ const ProjectCreation = () => {
         <button type='submit'>submit</button>
        <div>{message}</div>
 
-    
+       <ul> Users: 
+            {usernames.map((user) =>(
+                <li key={user.id}>
+                     {user.displayName}
+                     <button onClick={() => setAsLead(user.id, user.displayName)} type='button'> Set as lead</button>
+
+
+                    
+                </li>
+            ))}
+
+        </ul>
 
     </form>
     

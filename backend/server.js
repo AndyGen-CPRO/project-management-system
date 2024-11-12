@@ -15,7 +15,9 @@ app.use(express.json({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
+//api routing 
 app.use("/api", authRoutes,projectRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
