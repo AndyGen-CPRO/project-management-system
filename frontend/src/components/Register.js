@@ -18,31 +18,33 @@ const Register = () => {
     };
     
     return (
-        <div>
-            <h2>Register</h2>
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:flex">
+            <h2 class="font-extrabold md:block">Register</h2>
             <form onSubmit={handleSubmit}>
+                <div>Display Name:</div>
                 <input 
                     type="text" 
-                    placeholder="Display Name" 
+                    placeholder="Tatsuki Fujimoto" 
                     value={displayName} 
                     onChange={(e) => setDisplayName(e.target.value)} 
                     required
                 />
+                <div>Email</div>
                 <input 
-                    type="email" 
-                    placeholder="Email" 
+                    type="email"    
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
                     required
                 />
+                <div>Password</div>
                 <input 
                     type="password" 
-                    placeholder="Password" 
+                    placeholder="*****" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     required
                 />
-                <button type="submit">Register</button>
+                <button type="submit"  className="bg-blue-500 text-white p-2 rounded">Register</button>
             </form>
             <p>{message}</p>
         </div>
