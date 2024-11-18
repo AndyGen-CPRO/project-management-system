@@ -28,14 +28,17 @@ const ProjectOverview = () => {
     
     useEffect(() => {
         if (!token) {
-            navigate("/login")
+            navigate("/login");
+            return;
         }
         fetchProject();
     }, [id]);
 
     const partsPage = () => {
-        navigate("/parts")
-    }
+        navigate("/project/:id/parts", {
+            state: { project }
+        })
+    };
 
     const tasksPage = () => {
         navigate("/tasks")
@@ -60,6 +63,7 @@ const ProjectOverview = () => {
                     fetchProject={fetchProject} 
                     token={token}
                 />}
+            <button onClick={partsPage}>See Parts</button>
         </div>
     )
 }

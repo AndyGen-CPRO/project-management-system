@@ -18,6 +18,7 @@ const CreateProject = () => {
     useEffect(() => {
         if (!token) {
             navigate("/login");
+            return;
         }
         console.log("Token:", token);
     });

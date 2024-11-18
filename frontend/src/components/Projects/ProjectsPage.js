@@ -14,6 +14,7 @@ const Projects = () => {
                 const token = getToken();
                 if (!token) {
                     navigate("/login");
+                    return;
                 }
 
                 const response = await axios.get("http://localhost:5000/projects/", {

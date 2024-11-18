@@ -2,12 +2,12 @@ const Part = require('../models/partModel')
 
 const createPart = async (req,res) => {
     try{
-        const { name, description, percentage } = req.body;
+        const { name, description } = req.body;
 
         const newPart = new Part({
             name,
             description,
-            percentage,
+            //percentage,
             projectId: req.params.projectId,
         });
 
