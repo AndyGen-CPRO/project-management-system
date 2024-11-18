@@ -1,22 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
-import './output.css';
+import Home from './components/Home/HomePage';
+import Register from './components/Auth/Register';
+import Login from './components/Auth/Login';
+import Projects from './components/Projects/ProjectsPage';
+import CreateProject from './components/Projects/CreateProject';
+import ProjectOverview from './components/Projects/ProjectOverviewPage'
 
 const App = () => {
   return (
-    <Router>
-      <nav>
-        <Link to="/register">Register</Link>
-        <Link to="/login">Login</Link>
-      </nav>
-
+    <div>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/create-project" element={<CreateProject />} />
+        <Route path="/project/:id" element={<ProjectOverview />} />
       </Routes>
-    </Router>
+    </div>
   );
 };
 export default App;
