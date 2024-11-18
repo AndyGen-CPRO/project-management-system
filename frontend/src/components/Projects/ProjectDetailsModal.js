@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import { getToken } from '../../utils/auth';
 
-const ProjectDetails = ({ closeModal, project, fetchProject }) => {
+const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
     const [editMode, setEditMode] = useState(false);
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState(new Date());
@@ -14,14 +13,6 @@ const ProjectDetails = ({ closeModal, project, fetchProject }) => {
 
     const handleUpdate = async(e) => {
         e.preventDefault();
-
-        const token = getToken();
-        if (!token) {
-            setMessage("You need to be logged in.");
-            return;
-        }
-        console.log("Token:", token);
-
         try {
             const response = await axios.put(`http://localhost:5000/projects/${project._id}`, {
                 name,

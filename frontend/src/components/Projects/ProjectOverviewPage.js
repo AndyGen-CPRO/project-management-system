@@ -10,15 +10,10 @@ const ProjectOverview = () => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const [detailsModal, setDetailsModal] = useState(false);
+    const token = getToken();
 
     const fetchProject = async() => {
         try {
-            const token = getToken();
-            if (!token) {
-                setMessage("You need to be logged in.");
-                return;
-            }
-
             const response = await axios.get(`http://localhost:5000/projects/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -32,6 +27,9 @@ const ProjectOverview = () => {
     };
     
     useEffect(() => {
+        if (!token) {
+            navigate("/login")
+        }
         fetchProject();
     }, [id]);
 
@@ -60,6 +58,7 @@ const ProjectOverview = () => {
                     closeModal={() => {setDetailsModal(false)}} 
                     project={project} 
                     fetchProject={fetchProject} 
+                    token={token}
                 />}
         </div>
     )

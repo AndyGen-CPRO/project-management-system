@@ -9,17 +9,18 @@ const Parts = () => {
     const [description, setDescription] = useState("");
     const [percentage, setPercentage] = useState(0);
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+    const token = getToken();
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+        }
+        console.log("Token:", token);
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const token = getToken();
-        if (!token) {
-            setMessage("You need to be logged in.");
-            return;
-        }
-        console.log("Token:", token);
-
         try {
             const response = await axios.post(`http://localhost:5000/parts/${projectId}/create`, {
                 name,
@@ -39,7 +40,7 @@ const Parts = () => {
 
     return (
         <div>
-            <h1>Create Parts for </h1>
+            <h1>Create Parts </h1>
         </div>
     )
 }

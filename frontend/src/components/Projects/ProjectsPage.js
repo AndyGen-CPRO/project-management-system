@@ -13,8 +13,7 @@ const Projects = () => {
             try {
                 const token = getToken();
                 if (!token) {
-                    setMessage("You need to be logged in.");
-                    return;
+                    navigate("/login");
                 }
 
                 const response = await axios.get("http://localhost:5000/projects/", {

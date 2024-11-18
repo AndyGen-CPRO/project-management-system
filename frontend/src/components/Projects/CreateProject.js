@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
@@ -12,17 +12,18 @@ const CreateProject = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [description, setDescription] = useState("");
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+    const token = getToken();
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+        }
+        console.log("Token:", token);
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const token = getToken();
-        if (!token) {
-            setMessage("You need to be logged in.");
-            return;
-        }
-        console.log("Token:", token);
-
         try {
             const response = await axios.post("http://localhost:5000/projects/create", {
                 name,
