@@ -1,3 +1,8 @@
+/* »»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»
+ORIGINAL VERSION
+»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» */
+
+/*
 .App {
   text-align: center;
 }
@@ -35,4 +40,361 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+
+/* »»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»
+VERSION 2
+»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» */
+
+/*
+.App {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.sidebar nav div {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.link {
+  color: #61dafb;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  font-size: 18px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+}
+
+.link:hover {
+  background-color: #3b4a59;
+  color: #ffffff;
+}
+
+.link.active {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #61dafb;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  margin-left: 200px;
+}
+
+.footer {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 10px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.footer div {
+  margin: 3px 0;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.register-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.register-form input:focus {
+  border-color: #61dafb;
+  background-color: #f0f8ff;
+  outline: none;
+}
+
+.register-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+*/
+
+/* »»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»
+VERSION 3
+»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» */
+
+
+.App {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.sidebar nav div {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.link {
+  color: #61dafb;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  font-size: 18px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+}
+
+.link:hover {
+  background-color: #3b4a59;
+  color: #ffffff;
+}
+
+.link.active {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #61dafb;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  margin-left: 200px;
+}
+
+.footer {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 10px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.footer div {
+  margin: 3px 0;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.centered-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.project-item {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.project-item:hover {
+  border-color: #61dafb;
+  background-color: #f0f8ff;
+}
+
+.project-details {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.project-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.project-actions .button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-actions .button:hover {
+  background-color: #3b4a59;
+}
+
+.button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3b4a59;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.register-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.register-form input:focus {
+  border-color: #61dafb;
+  background-color: #f0f8ff;
+  outline: none;
+}
+
+.register-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+  background-color: #3b4a59;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.back-button {
+  background-color: #282c34;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #3b4a59;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.set-lead-button {
+  background-color: #282c34;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.set-lead-button:hover {
+  background-color: #3b4a59;
 }
