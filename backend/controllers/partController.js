@@ -35,8 +35,8 @@ const getPartById = async (req,res) => {
 
 const getAllParts = async(req,res) => {
     try{
-        const part = await Part.find({ projectId: req.params.projectId })
-        res.status(200).json(part);
+        const parts = await Part.find({ projectId: req.params.projectId })
+        res.status(200).json(parts);
 
     } catch (error)
     {
