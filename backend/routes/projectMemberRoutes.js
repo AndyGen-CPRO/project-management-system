@@ -5,9 +5,9 @@ const {
     addProjectMember, getProjectMembers, updateMemberRole, removeProjectMember
 } = require("../controllers/projectMemberController");
 
-router.post("/:projectId/add", authenticate, addProjectMember);
-router.get("/:projectId", authenticate,getProjectMembers);
-router.put("/:projectId/:userId", authenticate, updateMemberRole);
-router.delete("/:projectId/:userId", authenticate, removeProjectMember);
+router.post("/:projectId/members/add", authenticate, addProjectMember);
+router.get("/:projectId/members", authenticate,getProjectMembers);
+router.put("/:projectId/member/:userId", authenticate, updateMemberRole);
+router.delete("/:projectId/member/:userId", authenticate, removeProjectMember);
 
 module.exports = router;

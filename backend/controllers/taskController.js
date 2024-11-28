@@ -24,7 +24,7 @@ const createTask = async (req,res) => {
 const getTaskById = async (req,res) => {
     try{
         const task = await Task.findOne({ 
-            _id: req.params.taskId, partId: req.params.partId 
+            _id: req.params.taskId, projectId: req.params.projectId
         });
         if (!task)  return res.status(404).json({message : 'Error finding task'})
         
@@ -47,7 +47,7 @@ const getAllTasksByProject = async(req,res) => {
 const getAllTasksByPart = async(req,res) => {
     try{
         const tasks = await Task.find({ partId: req.params.partId })
-        res.status(200).json(task);
+        res.status(200).json(tasks);
 
     } catch (error) {
         res.status(500).json({message :' Error retriving task',error})

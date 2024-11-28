@@ -22,7 +22,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                     return;
                 }
 
-                const response = await axios.get(`http://localhost:5000/project-members/${project._id}`, {
+                const response = await axios.get(`http://localhost:5000/project/${project._id}/members`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -48,7 +48,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
         return; // Prevent submission if partId is not set
     }
         try {
-            const response = await axios.post(`http://localhost:5000/tasks/${project._id}/create`, {
+            const response = await axios.post(`http://localhost:5000/project/${project._id}/tasks/create`, {
                 partId,
                 name,
                 description,
@@ -89,7 +89,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                         <label>Part</label>
                         {parts.length > 0 ? (
                             <select onChange={(e) => setPartId(e.target.value)}>
-                                <option value="" disabled>Select a Part</option>
+                                <option value="" disabled selected>Select a Part</option>
                                 {parts.map((part) => (
                                 <option key={part._id} value={part._id}>
                                     {part.name}
@@ -129,7 +129,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                     <div>
                         <label>Priority: </label>
                         <select onChange={(e) => setPriority(e.target.value)}>
-                            <option value="" disabled>...</option>
+                            <option value="" disabled selected>...</option>
                             <option value="low">Low</option>
                             <option value="normal">Normal</option>
                             <option value="high">High</option>

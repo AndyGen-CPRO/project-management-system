@@ -5,11 +5,11 @@ const {
     createTask, getTaskById, getAllTasksByProject, getAllTasksByPart, updateTask, deleteTask
  } = require("../controllers/taskController")
 
-router.post("/:projectId/create", authenticate, createTask);
-router.get("/:projectId", authenticate, getAllTasksByProject);
-router.get("/:partId", authenticate, getAllTasksByPart);
-router.get("/:taskId", authenticate, getTaskById);
-router.put("/:taskId", authenticate, updateTask);
-router.delete("/:taskId", authenticate, deleteTask);
+router.post("/:projectId/tasks/create", authenticate, createTask);
+router.get("/:projectId/tasks", authenticate, getAllTasksByProject);
+router.get("/:projectId/part/:partId/tasks", authenticate, getAllTasksByPart);
+router.get("/:projectId/task/:taskId", authenticate, getTaskById);
+router.put("/:projectId/task/:taskId", authenticate, updateTask);
+router.delete("/:projectId/task/:taskId", authenticate, deleteTask);
 
 module.exports = router;

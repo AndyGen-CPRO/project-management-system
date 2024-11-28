@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { getToken } from '../../utils/auth';
 import CreatePart from './CreatePartModal';
+import PartDetails from './PartDetailsModal';
 
 const Parts = () => {
     const { state } = useLocation();
@@ -10,6 +11,7 @@ const Parts = () => {
     const [parts, setParts] = useState([]);
     const [message, setMessage] = useState("");
     const [createPartModal, setCreatePartModal] = useState(false);
+    const [selectedPart, setSelectedPart] = useState("");
     const navigate = useNavigate();
     const token = getToken();
 
@@ -21,7 +23,7 @@ const Parts = () => {
                     return;
                 }
 
-                const response = await axios.get(`http://localhost:5000/parts/${project._id}`, {
+                const response = await axios.get(`http://localhost:5000/project/${project._id}/parts`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -70,13 +72,24 @@ const Parts = () => {
                                             </ul>
                                         </div>
                                     )}      
-                                </td>                        
+                                </td>   
+                                <td>
+                                    <button onClick={() => setSelectedPart(part)}>Details</button>   
+                                </td>                     
                             </tr>
                         ))}
                     </tbody>
                 </table>
             ) : (
                 <p>Project has no parts. Click the Create button to create one.</p>
+            )}
+
+            {selectedPart && (
+                <PartDetails 
+                    closeModal={() => setSelectedPart("")}
+                    part={selectedPart}
+                    token={token}
+                />
             )}
         </div>
     )

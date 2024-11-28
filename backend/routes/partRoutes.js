@@ -5,10 +5,10 @@ const {
     createPart, getPartById, getAllParts, updatePart, deletePart
  } = require("../controllers/partController")
 
-router.post("/:projectId/create", authenticate, createPart);
-router.get("/:projectId", authenticate, getAllParts);
-router.get("/:partId", authenticate, getPartById);
-router.put("/:partId", authenticate, updatePart);
-router.delete("/:partId", authenticate, deletePart);
+router.post("/:projectId/parts/create", authenticate, createPart);
+router.get("/:projectId/parts", authenticate, getAllParts);
+router.get("/:projectId/part/:partId", authenticate, getPartById);
+router.put("/:projectId/part/:partId", authenticate, updatePart);
+router.delete("/:projectId/part/:partId", authenticate, deletePart);
 
 module.exports = router;

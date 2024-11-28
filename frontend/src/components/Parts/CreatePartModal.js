@@ -11,7 +11,7 @@ const CreatePart = ({ closeModal, project, token }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:5000/parts/${project._id}/create`, {
+            const response = await axios.post(`http://localhost:5000/project/${project._id}/parts/create`, {
                 name,
                 description,
             }, {

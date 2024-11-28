@@ -22,7 +22,7 @@ const Tasks = () => {
                     return;
                 }
 
-                const response = await axios.get(`http://localhost:5000/parts/${project._id}`, {
+                const response = await axios.get(`http://localhost:5000/project/${project._id}/parts`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -44,7 +44,7 @@ const Tasks = () => {
                     return;
                 }
 
-                const response = await axios.get(`http://localhost:5000/tasks/${project._id}`, {
+                const response = await axios.get(`http://localhost:5000/project/${project._id}/tasks`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
