@@ -65,7 +65,6 @@ const Parts = () => {
                                     <strong>{part.name}</strong>
                                     {part.description && (
                                         <div>
-                                            <p>Description</p>
                                             <ul>
                                                 <li>{part.description}</li>
                                             </ul>

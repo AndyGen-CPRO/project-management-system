@@ -57,11 +57,11 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
                 {!editMode ? ( 
                     <>
                         <h2>Project Details</h2>
-                        <p>{project.name}</p>
-                        <p>{project.description}</p>
-                        <p>{project.startDate}</p>
-                        <p>{project.endDate}</p>
-                        <p>{project.status}</p>
+                        <p>Project Name: {project.name}</p>
+                        <p>Description: {project.description}</p>
+                        <p>Start Date: {project.startDate}</p>
+                        <p>End Date: {project.endDate}</p>
+                        <p>Status: {project.status}</p>
                         <button onClick={editBtn}>Edit</button> 
                         <button onClick={() => closeModal(false)}>Close</button>
                     </>

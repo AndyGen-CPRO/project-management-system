@@ -6,8 +6,10 @@ const taskSchema = new mongoose.Schema({
     //startDate: { type: Date, required: true },
     dueDate: { type: Date, required: true },
     priority: { type: String, required: true },
+    status: { type: String, default: "pending", required: true },
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
     partId: { type: mongoose.Schema.Types.ObjectId, ref: 'Part', required: true },
+    assignedMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 const Task = mongoose.model('Task', taskSchema);

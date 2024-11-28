@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const partRoutes = require("./routes/partRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const projectMemberRoutes = require("./routes/projectMemberRoutes");
 
 dotenv.config();
 connectDB();
@@ -23,7 +24,8 @@ app.use(cors({
 app.use("/auth", authRoutes);
 app.use("/projects", projectRoutes);
 app.use("/parts", partRoutes);
-app.use("/tasks", taskRoutes)
+app.use("/tasks", taskRoutes);
+app.use("/project-members", projectMemberRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

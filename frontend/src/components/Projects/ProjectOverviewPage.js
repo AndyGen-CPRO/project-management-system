@@ -41,7 +41,9 @@ const ProjectOverview = () => {
     };
 
     const tasksPage = () => {
-        navigate("/tasks")
+        navigate("/project/:id/tasks", {
+            state: { project }
+        })
     }
 
     if (!project) {
@@ -63,7 +65,8 @@ const ProjectOverview = () => {
                     fetchProject={fetchProject} 
                     token={token}
                 />}
-            <button onClick={partsPage}>See Parts</button>
+            <button onClick={partsPage}>Parts</button>
+            <button onClick={tasksPage}>Tasks</button>
         </div>
     )
 }

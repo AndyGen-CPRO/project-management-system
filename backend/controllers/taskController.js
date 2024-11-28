@@ -2,23 +2,22 @@ const Task = require('../models/taskModel')
 
 const createTask = async (req,res) => {
     try{
-        const { name, description, dueDate, priority } = req.body;
+        const { partId, name, description, dueDate, priority, assignedMembers } = req.body;
 
         const newTask = new Task({
+            partId,
             name,
             description,
             dueDate,
             priority,
             projectId: req.params.projectId,
-            partId: req.params.partId
+            assignedMembers
         });
 
         await newTask.save();
         res.status(201).json(newTask)
-    }
-
-    catch (error) {
-        res.status(400).json({ message : 'Error creating task',error})
+    } catch (error) {
+        res.status(400).json({ message : 'Error creating task',error })
     }
 }
 
@@ -29,8 +28,8 @@ const getTaskById = async (req,res) => {
         });
         if (!task)  return res.status(404).json({message : 'Error finding task'})
         
-        res.status(200).json(task);}
-    catch(error){
+        res.status(200).json(task);
+    } catch(error){
         res.status(500).json({message : 'Error retriving task',error})
     }
 }
@@ -38,10 +37,9 @@ const getTaskById = async (req,res) => {
 const getAllTasksByProject = async(req,res) => {
     try{
         const tasks = await Task.find({ projectId: req.params.projectId })
-        res.status(200).json(task);
+        res.status(200).json(tasks);
 
-    } catch (error)
-    {
+    } catch (error) {
         res.status(500).json({message :' Error retriving task',error})
     }
 }
@@ -51,8 +49,7 @@ const getAllTasksByPart = async(req,res) => {
         const tasks = await Task.find({ partId: req.params.partId })
         res.status(200).json(task);
 
-    } catch (error)
-    {
+    } catch (error) {
         res.status(500).json({message :' Error retriving task',error})
     }
 }
