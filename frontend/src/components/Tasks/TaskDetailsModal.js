@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
+import TaskAssignment from './TaskAssignmentModal';
 
 const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, project, task, token }) => {
-    const [members, setMembers] = useState([]);
+    const [members, setTaskMembers] = useState([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState(new Date());
     const [priority, setPriority] = useState("");
     const [status, setStatus] = useState("");
+    const [assignTask, setAssignTask] = useState(false);
     
     useEffect(() => {
         if (project._id) {
-            fetchMembers();
+            fetchTaskMembers();
         }
 
         if (task && viewOrEdit === "edit"){
@@ -24,7 +26,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
         }
     }, []);
 
-    const fetchMembers = async () => {
+    const fetchTaskMembers = async () => {
         try {
             const response = await axios.get(
                 `http://localhost:5000/project/${project._id}/task/${task._id}/members`
@@ -33,7 +35,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                     Authorization: `Bearer ${token}`
                 }
             });
-            setMembers(response.data);
+            setTaskMembers(response.data);
         } catch (error) {
             alert("Error Fetching Members");
         }
@@ -63,6 +65,10 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
         }
     };
 
+    const taskAssignmentBtn = () => {
+        setAssignTask(!assignTask);
+    }
+
     return (
         <div className="modal-overlay">
             <div className="modal-content">
@@ -78,7 +84,8 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                             {members.map(index => (
                                 <li key={index._id}>{index.userId.displayName}</li>
                             ))}
-                        </ul>
+                        </ul>   
+                        <button onClick={taskAssignmentBtn}>Assign/Remove Members</button>
                         <button onClick={closeModal}>Close</button>
                     </div>
                 )}
@@ -124,7 +131,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                                 </select>
                             </div>
                             <div>
-                                <label>Priority: </label>
+                                <label>Status: </label>
                                 <select  value={status} onChange={(e) => setStatus(e.target.value)}>
                                     <option value="" disabled>...</option>
                                     <option value="incomplete">Incomplete</option>
@@ -137,6 +144,13 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                         </form>
                     </>
                 )}
+
+                {assignTask && <TaskAssignment 
+                    closeModal={() => setAssignTask(false)}
+                    project={project}
+                    task={task}
+                    token={token}
+                />}
             </div>
         </div>
     )

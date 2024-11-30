@@ -10,7 +10,7 @@ const assignMember = async (req, res) => {
             return res.status(400).json({ message: "Member is already assigned to this task."})
         }
 
-        const newAssigned = new assignMember({
+        const newAssigned = new TaskAssignment({
             taskId,
             userId
         });

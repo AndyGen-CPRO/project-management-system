@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const TaskAssignment = ({closeModal, project, token }) => {
+const TaskAssignment = ({closeModal, project, task, token }) => {
     const [projMembers, setProjMembers] = useState([]);
-    const [assignedMembers, setAssignedMembers] = useState([]);
+    const [assignedMember, setAssignedMember] = useState("");
     const [message, setMessage] = useState([]);
     const navigate = useNavigate();
 
@@ -34,12 +34,15 @@ const TaskAssignment = ({closeModal, project, token }) => {
     }, []);
 
     const handleSubmit = async(e) => {
+        setAssignedMember(e.target.value)
+        console.log(task._id);
+        console.log(assignedMember);
         e.preventDefault();
         try {
             const response = await axios.post(
-                `http://localhost:5000/project/${project._id}/task/$`
+                `http://localhost:5000/project/${project._id}/task/${task._id}/assign`
                 , {
-                assignedMembers
+                userId: assignedMember
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -52,43 +55,24 @@ const TaskAssignment = ({closeModal, project, token }) => {
         }
     };
 
-    const handleMemberSelection = (e) => {
-        const { value, checked } = e.target;
-
-        setAssignedMembers((prev) => {
-            if (checked) {
-                return [...prev, value]; // Add member to selected list
-            } else {
-                return prev.filter(member => member !== value); // Remove member from selected list
-            }
-        });
-    };
-
     return (
         <div className="modal-overlay">
             <div className="modal-content">
                 <h3>Select Members</h3>
-                <form onSubmit={handleSubmit}>
                     <div>
-                            <label>Assigned Members: </label>
-                            {projMembers.length > 0 ? (
-                                projMembers.map((member) => (
-                                    <div key={member._id}>
-                                        <input
-                                            type="checkbox"
-                                            value={member.userId._id}
-                                            onChange={handleMemberSelection}
-                                        />
-                                        <label>{member.userId.displayName}</label>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No members found.</p>
-                            )}
-                        </div>
-                        <button type="submit">Submit</button>
-                        <button onClick={() => closeModal(false)}>Cancel</button>
-                </form>
+                        <label>Project Members: </label>
+                        {projMembers.length > 0 ? (
+                            projMembers.map((member) => (
+                                <div key={member._id}>
+                                    <label>{member.userId.displayName}</label>
+                                    <button value={member.userId._id} onClick={handleSubmit}>Add</button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No members found.</p>
+                        )}
+                    </div>
+                    <button onClick={() => closeModal(false)}>Cancel</button>
             </div>
         </div>
     )
