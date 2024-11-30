@@ -15,8 +15,31 @@ const Register = () => {
             const { token } = response.data;
             setToken(token);
             setMessage("Register successful.");
-        } catch (error) {
-            setMessage("Registration Failed. Please try again.")
+        } catch (error) { // more precises error handing because it feels like this shit breaks every fresh install
+            if (error.response) {
+                const {status,data} = error.response
+                switch (status){
+                    case 400:
+                        setMessage('Bad request Incorrect information' +data.message);
+                        break;
+
+                    case 401:
+                        setMessage('Email already in use or unauthrized please log in' + data.message)
+                        break;
+                    case 404:
+                        setMessage('Not found' + data.message)
+                        break;
+                    case 500:
+                        setMessage('Server error: Server unavailable' +data.message)
+                        break;
+                    default:
+                        setMessage("Unknow Error has occured");
+                        break;
+
+                }
+            }
+
+            
         }
     };
     
