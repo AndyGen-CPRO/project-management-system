@@ -8,8 +8,7 @@ const taskSchema = new mongoose.Schema({
     priority: { type: String, required: true },
     status: { type: String, default: "pending", required: true },
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
-    partId: { type: mongoose.Schema.Types.ObjectId, ref: 'Part', required: true },
-    assignedMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    partId: { type: mongoose.Schema.Types.ObjectId, ref: 'Part', required: true }
 });
 
 const Task = mongoose.model('Task', taskSchema);

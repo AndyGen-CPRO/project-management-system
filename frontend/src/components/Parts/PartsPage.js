@@ -11,34 +11,35 @@ const Parts = () => {
     const [parts, setParts] = useState([]);
     const [message, setMessage] = useState("");
     const [createPartModal, setCreatePartModal] = useState(false);
-    const [selectedPart, setSelectedPart] = useState("");
+    const [selectedPart, setSelectedPart] = useState(null);
     const navigate = useNavigate();
     const token = getToken();
 
     useEffect(() => {
-        const fetchParts = async () => {
-            try {
-                if (!token) {
-                    navigate("/login");
-                    return;
-                }
-
-                const response = await axios.get(`http://localhost:5000/project/${project._id}/parts`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setParts(response.data);
-                setMessage("Fetching project parts successful.")
-            } catch (error) {
-                setMessage("Error fetching parts.")
-            }
-        };
-
         if (project._id) {
             fetchParts();
         }
     }, []);
+
+    const fetchParts = async () => {
+        try {
+            if (!token) {
+                navigate("/login");
+                return;
+            }
+
+            const response = await axios.get(`http://localhost:5000/project/${project._id}/parts`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setParts(response.data);
+            setMessage("Fetching project parts successful.")
+        } catch (error) {
+            setMessage("Error fetching parts.")
+        }
+    };
+
 
     return (
         <div>
@@ -48,6 +49,7 @@ const Parts = () => {
             {createPartModal && 
                 <CreatePart 
                     closeModal = {() => {setCreatePartModal(false)}}
+                    fetchParts={fetchParts}
                     project = {project}
                     token = {token}
                 />
@@ -86,7 +88,9 @@ const Parts = () => {
 
             {selectedPart && (
                 <PartDetails 
-                    closeModal={() => setSelectedPart("")}
+                    closeModal={() => setSelectedPart(null)}
+                    fetchParts={fetchParts}
+                    project={project}
                     part={selectedPart}
                     token={token}
                 />

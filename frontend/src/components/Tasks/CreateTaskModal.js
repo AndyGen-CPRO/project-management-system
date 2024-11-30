@@ -9,52 +9,18 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState(new Date());
     const [priority, setPriority] = useState("");
-    const [assignedMembers, setAssignedMembers] = useState([]);
-    const [projMembers, setProjMembers] = useState([]);
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchMembers = async () => {
-            try {
-                if (!token) {
-                    navigate("/login");
-                    return;
-                }
-
-                const response = await axios.get(`http://localhost:5000/project/${project._id}/members`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setProjMembers(response.data);
-                setMessage("Fetching project members successful.")
-            } catch (error) {
-                setMessage("Error fetching members.")
-            }
-        };
-
-        if (project._id) {
-            fetchMembers();
-        }
-    }, []);
-
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log("Selected Part ID:", partId); // Debugging line
-
-    if (!partId) {
-        setMessage("Please select a part.");
-        return; // Prevent submission if partId is not set
-    }
         try {
             const response = await axios.post(`http://localhost:5000/project/${project._id}/tasks/create`, {
                 partId,
                 name,
                 description,
                 dueDate,
-                priority,
-                assignedMembers
+                priority
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -66,19 +32,6 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
             setMessage("Task creation failed.")
         }
     };
-
-    const handleMemberSelection = (e) => {
-        const { value, checked } = e.target;
-
-        setAssignedMembers((prev) => {
-            if (checked) {
-                return [...prev, value]; // Add member to selected list
-            } else {
-                return prev.filter(member => member !== value); // Remove member from selected list
-            }
-        });
-    };
-
     return (
         <div className="modal-overlay">
             <div className="modal-content">
@@ -110,7 +63,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                     </div>
                     <div>
                         <label>Description: </label>
-                        <input
+                        <textarea
                             type="text"
                             placeholder="C# Final Project"
                             onChange={(e) => setDescription(e.target.value)}
@@ -134,23 +87,6 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                             <option value="normal">Normal</option>
                             <option value="high">High</option>
                         </select>
-                    </div>
-                    <div>
-                        <label>Assigned Members: </label>
-                        {projMembers.length > 0 ? (
-                            projMembers.map((member) => (
-                                <div key={member._id}>
-                                    <input
-                                        type="checkbox"
-                                        value={member.userId._id}
-                                        onChange={handleMemberSelection}
-                                    />
-                                    <label>{member.userId.displayName}</label>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No members found.</p>
-                        )}
                     </div>
                     <button type="submit">Submit</button>
                     <button onClick={() => closeModal(false)}>Cancel</button>

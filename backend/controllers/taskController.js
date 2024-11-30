@@ -2,7 +2,7 @@ const Task = require('../models/taskModel')
 
 const createTask = async (req,res) => {
     try{
-        const { partId, name, description, dueDate, priority, assignedMembers } = req.body;
+        const { partId, name, description, dueDate, priority } = req.body;
 
         const newTask = new Task({
             partId,
@@ -11,7 +11,6 @@ const createTask = async (req,res) => {
             dueDate,
             priority,
             projectId: req.params.projectId,
-            assignedMembers
         });
 
         await newTask.save();

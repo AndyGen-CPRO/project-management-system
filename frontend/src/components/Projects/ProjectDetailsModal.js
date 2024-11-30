@@ -100,7 +100,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
                             </div>
                             <div>
                                 <label>Description: <i>Optional, but recommended</i></label>
-                                <input
+                                <textarea
                                     type="text"
                                     value={description}
                                     placeholder="C# Final Project"
@@ -114,14 +114,14 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
                                     onChange={(e) => setStatus(e.target.value)}
                                     required
                                 >
-                                    <option value="" disabled>Select Status...</option>
+                                    <option value="" disabled selected>Select Status...</option>
                                     <option value="on-going">On-Going</option>
                                     <option value="dropped">Dropped</option>
                                     <option value="finished">Finished</option>
                                 </select>
                             </div>
                             <button type="submit">Save</button>
-                            <button type="button" onClick={() => setEditMode(false)}>Cancel</button>
+                            <button onClick={() => setEditMode(false)}>Cancel</button>
                         </form>
                     </>
                 )}

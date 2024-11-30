@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const CreatePart = ({ closeModal, project, token }) => {
+const CreatePart = ({ closeModal, fetchParts, project, token }) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     //const [percentage, setPercentage] = useState(0);
@@ -20,6 +20,7 @@ const CreatePart = ({ closeModal, project, token }) => {
                 },
                 withCredentials: true,
             });
+            fetchParts();
             setMessage("Part created successfully.")
         } catch (error) {
             setMessage("Part creation failed.")
