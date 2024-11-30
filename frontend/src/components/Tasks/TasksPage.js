@@ -61,6 +61,9 @@ const Tasks = () => {
             setMessage("Error fetching tasks.")
         }
     };
+    const goBack = () => {
+        navigate(-1)
+    }
 
     const getPartName = (partId) => {
         const part = parts.find(p => p._id === partId);
@@ -120,7 +123,9 @@ const Tasks = () => {
                         />
                     )}
             </table>
+            <button onClick={goBack}>Back</button>
         </div>
+    
     )
 }
 

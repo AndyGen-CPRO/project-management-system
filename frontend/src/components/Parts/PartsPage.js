@@ -39,6 +39,9 @@ const Parts = () => {
             setMessage("Error fetching parts.")
         }
     };
+    const goBack = () => {
+        navigate(-1)
+    }
 
 
     return (
@@ -95,6 +98,7 @@ const Parts = () => {
                     token={token}
                 />
             )}
+            <button onClick={goBack}>Back</button>
         </div>
     )
 }

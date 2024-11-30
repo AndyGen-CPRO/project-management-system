@@ -25,6 +25,10 @@ const ProjectOverview = () => {
             setMessage("Error fetching project.")
         }
     };
+
+    const goBack = () => {
+        navigate("/projects");
+    }
     
     useEffect(() => {
         if (!token) {
@@ -67,6 +71,9 @@ const ProjectOverview = () => {
                 />}
             <button onClick={partsPage}>Parts</button>
             <button onClick={tasksPage}>Tasks</button>
+            <div>
+            <button onClick={goBack}>Back </button>
+            </div>
         </div>
     )
 }

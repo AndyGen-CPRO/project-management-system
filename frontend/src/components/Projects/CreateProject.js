@@ -38,10 +38,16 @@ const CreateProject = () => {
                 withCredentials: true,
             });
             setMessage("Project created successfully.")
+            navigate("/projects") //moves the user back to the general page after submission 
         } catch (error) {
             setMessage("Project creation failed.")
         }
     };
+
+    const goback = () => {
+        navigate("/projects")
+
+    }
 
     return (
         <div>
@@ -84,6 +90,7 @@ const CreateProject = () => {
                     />
                 </div>
                 <button type="submit">Create</button>
+                <button type='button' onClick={goback} >Back</button>
             </form>
         </div>
     )
