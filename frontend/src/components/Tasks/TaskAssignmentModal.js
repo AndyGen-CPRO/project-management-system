@@ -33,16 +33,12 @@ const TaskAssignment = ({closeModal, project, task, token }) => {
         }
     }, []);
 
-    const handleSubmit = async(e) => {
-        setAssignedMember(e.target.value)
-        console.log(task._id);
-        console.log(assignedMember);
-        e.preventDefault();
+    const handleSubmit = async(userId) => {
         try {
             const response = await axios.post(
                 `http://localhost:5000/project/${project._id}/task/${task._id}/assign`
                 , {
-                userId: assignedMember
+                userId: userId
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -65,7 +61,7 @@ const TaskAssignment = ({closeModal, project, task, token }) => {
                             projMembers.map((member) => (
                                 <div key={member._id}>
                                     <label>{member.userId.displayName}</label>
-                                    <button value={member.userId._id} onClick={handleSubmit}>Add</button>
+                                    <button onClick={() => handleSubmit(member.userId._id)}>Add</button>
                                 </div>
                             ))
                         ) : (
