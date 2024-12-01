@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { getToken } from '../../utils/auth';
 
+
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [message, setMessage] = useState("");
@@ -35,12 +36,16 @@ const Projects = () => {
     const createProject = () => {
         navigate("/create-project")
     };
+    const goToInbox = () => {
+        navigate("/InboxPage")
+    }
 
     return (
         <div>
             <h1>Projects</h1>
             {message && <p>{message}</p>}
             <button onClick={createProject}>Create</button>
+            <button onClick={goToInbox}>Inbox</button>
             {projects.length > 0 ? (
                 <table>
                     <thead>
