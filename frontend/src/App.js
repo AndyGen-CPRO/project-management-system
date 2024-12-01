@@ -9,6 +9,7 @@ import CreateProject from './components/Projects/CreateProject';
 import ProjectOverview from './components/Projects/ProjectOverviewPage';
 import Parts from './components/Parts/PartsPage';
 import Tasks from './components/Tasks/TasksPage';
+import InboxPage from './components/Inbox/InboxPage';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/project/:id" element={<ProjectOverview />} />
         <Route path="/project/:id/parts" element={<Parts />} />
         <Route path="/project/:id/tasks" element={<Tasks />} />
+        <Route path="/InboxPage" element = {<InboxPage />} />
       </Routes>
     </div>
   );
