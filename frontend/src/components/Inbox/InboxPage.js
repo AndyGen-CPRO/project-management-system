@@ -25,6 +25,12 @@ const InboxPage = ()  => {
 
             <div>
                 <h1>send</h1>
+                <form>
+
+                
+
+
+                </form>
             </div>
 
 

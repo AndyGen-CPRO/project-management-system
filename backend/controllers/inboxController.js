@@ -1,16 +1,18 @@
 const Inbox = require("../models/inboxModel")
 
 
-
+//adds messages 
 const addMessage = async (req,res) => {
     try{
-         
+        const {title,body,userId} = req.body
+
         const newMessage = new Inbox({
             title,
             body,
-            projectId : req.params.projectId,
-            userId: req.body
-        })
+            projectId : req.params.projectId, //gets from param
+            userId: req.user.id, //gets userId from the auth token
+        });
+
         await newMessage.save();
         res.status(201).json(newMessage)
     }catch(error) {
