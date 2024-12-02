@@ -1,16 +1,21 @@
-const Inbox = require("../models/inboxModel")
-
+const Inbox = require("../models/inboxModel");
+const ProjectMembers = require("../models/projectMemberModel");
+const { v4: uuidv4 } = require('uuid');
 
 //adds messages 
-const addMessage = async (req,res) => {
+const sendInvitation = async (req,res) => {
     try{
-        const {title,body,userId} = req.body
+        const { receiverId, title, body } = req.body
+
+        const invitationToken = uuidv4();
 
         const newMessage = new Inbox({
+            receiverId,
+            senderId: req.user.id, //gets userId from the auth token
+            projectId : req.params.projectId, //gets from param
             title,
             body,
-            projectId : req.params.projectId, //gets from param
-            userId: req.user.id, //gets userId from the auth token
+            invitationToken
         });
 
         await newMessage.save();
@@ -19,6 +24,27 @@ const addMessage = async (req,res) => {
         res.status(400).json({ message: "Error sending message ", error });
     }
 }
+
+const acceptInvite = async(req, res) => {
+    const { token } = req.params;
+
+    try {
+        const invitation = Inbox.findOne({ invitationToken: token });
+
+        if(!invitation) return res.status(404).json({ message: "Invitation token invalid." })
+        
+        const newProjectMember = new ProjectMember({
+            projectId: invitation.projectId,
+            userId: req.user.id
+        });
+
+        await newProjectMember.save();
+
+        res.status(201).json({ message: "Invitation accepted. User added to project."})
+    } catch (error) {
+        res.status(500).json({ message: "Error accepting invitation", error})
+    }
+};
 
 const getInbox = async(req,res) => {
     try{
@@ -35,6 +61,7 @@ const getInbox = async(req,res) => {
 
 
  module.exports = {
-    addMessage,
+    sendInvitation,
+    acceptInvite,
     getInbox
  }

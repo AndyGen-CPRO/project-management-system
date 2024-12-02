@@ -26,7 +26,7 @@ app.use(cors({
 app.use("/auth", authRoutes);
 app.use("/projects", projectRoutes);
 app.use("/project", partRoutes, taskRoutes, projectMemberRoutes, taskAssignmentRoutes)
-app.use("/Inbox",inboxRoutes)
+app.use("/inbox", inboxRoutes)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

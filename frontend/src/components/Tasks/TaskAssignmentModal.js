@@ -9,29 +9,30 @@ const TaskAssignment = ({closeModal, project, task, token }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchMembers = async () => {
-            try {
-                if (!token) {
-                    navigate("/login");
-                    return;
-                }
-
-                const response = await axios.get(`http://localhost:5000/project/${project._id}/members`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setProjMembers(response.data);
-                setMessage("Fetching project members successful.")
-            } catch (error) {
-                setMessage("Error fetching members.")
-            }
-        };
-
         if (project._id) {
             fetchMembers();
         }
     }, []);
+
+    const fetchMembers = async () => {
+        try {
+            if (!token) {
+                navigate("/login");
+                return;
+            }
+
+            const response = await axios.get(`http://localhost:5000/project/${project._id}/members`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setProjMembers(response.data);
+            setMessage("Fetching project members successful.")
+        } catch (error) {
+            setMessage("Error fetching members.")
+        }
+    };
+
 
     const handleSubmit = async(userId) => {
         try {
