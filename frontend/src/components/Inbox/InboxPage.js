@@ -38,7 +38,6 @@ const fetchInbox = async(e) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Sender</th>
                         <th>Title</th>
                         <th>Body</th>
                         <th>Status</th>
@@ -47,11 +46,11 @@ const fetchInbox = async(e) => {
                 </thead>
                 <tbody>
                 {inbox.map(inbox => (
-                    <tr key={inbox.senderId.displayName}>
+                    <tr key={inbox._id}>
                         <td>{inbox.title}</td>
                         <td>{inbox.body}</td>
                         <td>{inbox.status}</td>
-                        <td>{inbox.sentDate}</td>
+                        <td>{inbox.dateSent}</td>
                         <td><button>Accept</button></td>
                     </tr>
                     ))}
