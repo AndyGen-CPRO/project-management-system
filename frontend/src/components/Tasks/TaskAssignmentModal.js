@@ -33,7 +33,6 @@ const TaskAssignment = ({closeModal, project, task, token }) => {
         }
     };
 
-
     const handleSubmit = async(userId) => {
         try {
             const response = await axios.post(

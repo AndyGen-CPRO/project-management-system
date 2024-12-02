@@ -1,5 +1,6 @@
 const ProjectMember = require("../models/projectMemberModel");
 
+//unused
 const addProjectMember = async (req, res) => {
     try {
         const newMember = new ProjectMember({

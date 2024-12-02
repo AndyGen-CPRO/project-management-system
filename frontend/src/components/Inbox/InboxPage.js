@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getToken } from '../../utils/auth';
@@ -7,10 +7,16 @@ import './Inbox.css' ;
 const InboxPage = ()  => {
 const [inbox, setInbox] = useState([]);
 const navigate = useNavigate();
+const token = getToken();
+
+useEffect(() => {
+    if (token) {
+        fetchInbox(); 
+    }
+}, [])
 
 const fetchInbox = async(e) => {
     try {
-        const token = getToken();
         if (!token) {
             navigate("/login");
             return;
