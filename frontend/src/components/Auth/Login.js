@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { setToken } from '../../utils/auth';
 
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -78,9 +77,7 @@ const Login = () => {
                 <button type="submit">Log in</button>
             </form>
             <p>{message}</p>
-            
         </div>
-        
     );
 };
 
