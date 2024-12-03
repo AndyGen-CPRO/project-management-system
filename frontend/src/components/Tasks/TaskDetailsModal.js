@@ -74,56 +74,63 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
             <div className="modal-content">
                 {viewOrEdit === "view" && (
                     <div>
-                        <h2>{getPartName(task.partId)} : {task.name}</h2>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{getPartName(task.partId)} : {task.name}</h2>
                         <strong>Description</strong>
-                        <p>{task.description}</p>
-                        <p>Due Date: {task.dueDate}</p>
-                        <p>Priority: {task.priority}</p>
-                        <p>Status: {task.status}</p>
+                        
+                        <p className="px-4 py-2 text-left text-sm font-semibold text-gray-700">{task.description}</p>
+                        <lable className="block text-gray-700 font-medium mb-1">Due Date:</lable>
+                        <p className="px-4 py-2 text-sm text-gray-600">{task.dueDate}</p>
+                        <lable className="block text-gray-700 font-medium mb-1">Priority:</lable>
+                        <p className="px-4 py-2 text-sm text-gray-600">Priority: {task.priority}</p>
+                        <lable className="block text-gray-700 font-medium mb-1">Status:</lable>
+                        <p className="px-4 py-2 text-sm text-gray-600"> {task.status}</p>
                         <ul>
                             {members.map(index => (
                                 <li key={index._id}>{index.userId.displayName}</li>
                             ))}
                         </ul>   
-                        <button onClick={taskAssignmentBtn}>Assign/Remove Members</button>
-                        <button onClick={closeModal}>Close</button>
+                        <button onClick={taskAssignmentBtn} class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Assign/Remove Members</button>
+                        <button onClick={closeModal} className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                     </div>
                 )}
                 {viewOrEdit === "edit" && (
                     <>
-                        <h2>Edit Task</h2>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Task</h2>
                         <form onSubmit={handleUpdate}>
                             <div>
-                                <label>Task Name: </label>
+                                <label className="block text-gray-700 font-medium mb-1">Task Name: </label>
                                 <input
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     required
+                                    className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label>Description: </label>
+                                <label className="block text-gray-700 font-medium mb-1">Description: </label>
                                 <textarea
                                     type="text"
                                     placeholder="C# Final Project"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     required
+                                    className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                            <label>Due Date: </label>
+                            <label className="block text-gray-700 font-medium mb-1">Due Date: </label>
                                 <DatePicker
                                     selected={dueDate}
                                     onChange={(date) => setDueDate(date)}
                                     dateFormat="yyyy/MM/dd"
                                     required
+                                    className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label>Priority: </label>
-                                <select  value={priority} onChange={(e) => setPriority(e.target.value)}>
+                                <label className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">Priority: </label>
+                                <select class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value={priority} onChange={(e) => setPriority(e.target.value)}>
                                     <option value="" disabled>...</option>
                                     <option value="low">Low</option>
                                     <option value="normal">Normal</option>
@@ -131,16 +138,16 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                                 </select>
                             </div>
                             <div>
-                                <label>Status: </label>
-                                <select  value={status} onChange={(e) => setStatus(e.target.value)}>
+                                <label className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">Status: </label>
+                                <select class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  value={status} onChange={(e) => setStatus(e.target.value)}>
                                     <option value="" disabled>...</option>
                                     <option value="incomplete">Incomplete</option>
                                     <option value="pending">Pending</option>
                                     <option value="complete">Complete</option>
                                 </select>
                             </div>
-                            <button type="submit">Save</button>
-                            <button onClick={closeModal}>Cancel</button>
+                            <button  type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Save</button>
+                            <button  onClick={closeModal} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
                         </form>
                     </>
                 )}

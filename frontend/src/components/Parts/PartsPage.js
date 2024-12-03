@@ -45,10 +45,11 @@ const Parts = () => {
 
 
     return (
-        <div>
-            <h2>{project.name} Parts</h2>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Parts</h2>
             {message && <p>{message}</p>}
-            <button onClick={() => setCreatePartModal(true)}>Create Part</button>
+            <button onClick={() => setCreatePartModal(true)} class="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create Part</button>
             {createPartModal && 
                 <CreatePart 
                     closeModal = {() => {setCreatePartModal(false)}}
@@ -59,27 +60,28 @@ const Parts = () => {
             }
 
             {parts.length > 0 ? (
-                <table>
+                <table className="w-full table-auto border-collapse bg-gray-200 shadow-lg rounded-lg">
                     <thead>
                         <tr>
-                            <th>Part</th>
+                            <th className="text-2xl font-bold text-gray-800 mb-6 text-center">Part</th>
                         </tr>
                     </thead>
                     <tbody>
                         {parts.map((part) => (
                             <tr key={part.id}>
                                 <td>
-                                    <strong>{part.name}</strong>
+                                    <strong className="text-1x1 font-bold text-gray-800 mb-6 text-center">{part.name}</strong>
                                     {part.description && (
                                         <div>
                                             <ul>
-                                                <li>{part.description}</li>
+                                                <label className="block text-gray-700 font-medium mb-1">Description: </label>
+                                                <li className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">{part.description}  </li>
                                             </ul>
                                         </div>
                                     )}      
                                 </td>   
                                 <td>
-                                    <button onClick={() => setSelectedPart(part)}>Details</button>   
+                                    <button onClick={() => setSelectedPart(part)}class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" >Details</button>   
                                 </td>                     
                             </tr>
                         ))}
@@ -98,7 +100,8 @@ const Parts = () => {
                     token={token}
                 />
             )}
-            <button onClick={goBack}>Back</button>
+            <button onClick={goBack}className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Back</button>
+            </div>
         </div>
     )
 }

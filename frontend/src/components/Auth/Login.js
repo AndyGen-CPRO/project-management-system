@@ -14,69 +14,84 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:5000/auth/login", { email, password });
             
-            if (response.status === 204) { // when the server responds with a 204 the frontend does nothing and it often threw me off. now it atleast tell you something went wrong or atlest that was the idea
-                setMessage("login atempt null no content found") // apparently axios get's stuck after returning a 204. https://github.com/axios/axios/issues/6327 more information here I think
-            } else if (response.data?.token){
-            const { token } = response.data;
-            setToken(token);
-            setMessage("Log in successful.");
-            navigate("/projects")}
-            else { //just for the unexpected 
-                setMessage("Unknown responce from server")
+            if (response.status === 204) {
+                setMessage("Login attempt failed: No content returned");
+            } else if (response.data?.token) {
+                const { token } = response.data;
+                setToken(token);
+                setMessage("Log in successful.");
+                navigate("/projects");
+            } else {
+                setMessage("Unknown response from the server.");
             }
-        } catch (error) { // more precise error handling because I made it for the Register and not point leaving login out
+        } catch (error) {
             if (error.response) {
-                const {status,data} = error.response
-                switch (status){
+                const { status, data } = error.response;
+                switch (status) {
                     case 400:
-                        setMessage('Bad request Incorrect information' +data.message);
+                        setMessage("Bad request: " + data.message);
                         break;
-
                     case 401:
-                        setMessage('unauthroized please log in' + data.message)
+                        setMessage("Unauthorized: " + data.message);
                         break;
                     case 404:
-                        setMessage('Not found' + data.message)
+                        setMessage("Not found: " + data.message);
                         break;
                     case 500:
-                        setMessage('Server error: Server unavailable' +data.message)
+                        setMessage("Server error: " + data.message);
                         break;
                     default:
-                        setMessage("Unknown Error has occured");
+                        setMessage("An unknown error occurred.");
                         break;
-
                 }
             }
         }
     };
-    
+
     return (
-        <div>
-            <h2>Log in</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required
-                    />
-                </div>
-                <button type="submit">Log in</button>
-            </form>
-            <p>{message}</p>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Log In</h2>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    {/* Email Input */}
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Email:</label>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    {/* Password Input */}
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Password:</label>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300"
+                    >
+                        Log In
+                    </button>
+                </form>
+                {/* Message Display */}
+                {message && (
+                    <p className="mt-4 text-sm font-medium text-red-600">
+                        {message}
+                    </p>
+                )}
+            </div>
         </div>
     );
 };

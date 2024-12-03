@@ -54,65 +54,77 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
+                <div >
                 {!editMode ? ( 
                     <>
-                        <h2>Project Details</h2>
-                        <p>Project Name: {project.name}</p>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center" >Project Details</h2>
+                        <p >Project Name: {project.name}</p>
+                        <div  class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
                         <p>Description: {project.description}</p>
+                        <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
                         <p>Start Date: {project.startDate}</p>
                         <p>End Date: {project.endDate}</p>
+                        <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
                         <p>Status: {project.status}</p>
-                        <button onClick={editBtn}>Edit</button> 
-                        <button onClick={() => closeModal(false)}>Close</button>
+                        <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
+                        
+                        <button onClick={editBtn} class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button> 
+                        <button onClick={() => closeModal(false)} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                     </>
                 ) : (
                     <>
-                        <h2>Edit Project</h2>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Project</h2>
                         {message && <p>{message}</p>}
                         <form onSubmit={handleUpdate}>
                             <div>
-                                <label>Project Name:</label>
+                                <label className="block text-gray-700 font-medium mb-1">Project Name:</label>
                                 <input
                                     type="text"
                                     value={name}
                                     placeholder="C# Final Project"
                                     onChange={(e) => setName(e.target.value)}
                                     required
+                                    className="px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label>Start Date:</label>
+                                <label className="block text-gray-700 font-medium mb-1">Start Date:</label>
                                 <DatePicker
                                     selected={startDate}
                                     onChange={(date) => setStartDate(date)}
                                     dateFormat="yyyy/MM/dd"
                                     required
+                                    className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label>End Date:</label>
+                                <label className="block text-gray-700 font-medium mb-1">End Date:</label>
                                 <DatePicker
                                     selected={endDate}
                                     onChange={(date) => setEndDate(date)}
                                     dateFormat="yyyy/MM/dd"
                                     required
+                                    className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label>Description: <i>Optional, but recommended</i></label>
+                                <label className="block text-gray-700 font-medium mb-1" >Description: <i>Optional, but recommended</i></label>
                                 <textarea
                                     type="text"
                                     value={description}
                                     placeholder="C# Final Project"
                                     onChange={(e) => setDescription(e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
-                            <div>
-                                <label>Status</label>
-                                <select
+                            <div >
+                                <label className="block text-gray-700 font-medium mb-1">Status</label>
+                                <select 
+                                
                                     value={status}
                                     onChange={(e) => setStatus(e.target.value)}
                                     required
+                                    class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                 >
                                     <option value="" disabled selected>Select Status...</option>
                                     <option value="on-going">On-Going</option>
@@ -120,11 +132,12 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
                                     <option value="finished">Finished</option>
                                 </select>
                             </div>
-                            <button type="submit">Save</button>
-                            <button onClick={() => setEditMode(false)}>Cancel</button>
+                            <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300"  type="submit">Save</button>
+                            <button onClick={() => setEditMode(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
                         </form>
                     </>
                 )}
+                </div>
             </div>
         </div>
     )

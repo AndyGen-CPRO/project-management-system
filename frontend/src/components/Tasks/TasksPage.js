@@ -70,60 +70,64 @@ const Tasks = () => {
         return part ? part.name : "Unknown Part";
     };
     return (
-        <div>
-            <h2>{project.name} Tasks</h2>
-            <button onClick={() => setCreateTaskModal(true)}>Create Task</button>
-            {createTaskModal && 
-            <CreateTask
-                closeModal={() => setCreateTaskModal(false)}
-                project={project}
-                parts={parts}
-                token={token}
-            />}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Part</th>
-                        <th>Task</th>
-                        <th>Description</th>
-                        <th>Due Date</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody> 
-                    {tasks.map(task => (
-                        <tr key={task._id}>
-                            <td>{getPartName(task.partId)}</td>
-                            <td>{task.name}</td>
-                            <td>{task.description}</td>
-                            <td>{task.dueDate}</td>
-                            <td>{task.priority}</td>
-                            <td>{task.status}</td>
-                            <td><button 
-                                onClick={() => {setSelectedTask(task); setViewOrEdit("view")}}
-                                >Details</button></td>
-                            {/* owner role button */}
-                            <td><button 
-                                onClick={() => {setSelectedTask(task); setViewOrEdit("edit")}}
-                                >Edit</button></td>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className=" w-2/8 p-8 bg-white shadow-lg rounded-lg">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Tasks</h2>
+                <button onClick={() => setCreateTaskModal(true)} class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create Task</button>
+                {createTaskModal && 
+                <CreateTask
+                    closeModal={() => setCreateTaskModal(false)}
+                    project={project}
+                    parts={parts}
+                    token={token}
+                />}
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Part</th>
+                            <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700" >Task</th>
+                            <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Description</th>
+                            <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Due Date</th>
+                            <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Priority</th>
+                            <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
                         </tr>
-                    ))}
-                </tbody>
-                    {selectedTask && (
-                        <TaskDetails 
-                            closeModal={() => {setSelectedTask(null); setViewOrEdit("")}}
-                            fetchTasks={fetchTasks}
-                            getPartName={getPartName}
-                            parts={parts}
-                            viewOrEdit={viewOrEdit}
-                            project={project}
-                            task={selectedTask}
-                            token={token}
-                        />
-                    )}
-            </table>
-            <button onClick={goBack}>Back</button>
+                    </thead>
+                    <tbody> 
+                        {tasks.map(task => (
+                            <tr key={task._id}>
+                                <td className="px-4 py-2 text-sm text-gray-600">{getPartName(task.partId)}</td>
+                                <td className="px-4 py-2 text-sm text-gray-600">{task.name}</td>
+                                <td className="px-4 py-2 text-sm text-gray-600">{task.description}</td>
+                                <td className="px-4 py-2 text-sm text-gray-600">{task.dueDate}</td>
+                                <td className="px-4 py-2 text-sm text-gray-600">{task.priority}</td>
+                                <td className="px-4 py-2 text-sm text-gray-600">{task.status}</td>
+                                <td><button className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    onClick={() => {setSelectedTask(task); setViewOrEdit("view")}}
+                                    >Details</button></td>
+                                {/* owner role button */}
+                                
+                                <td><button 
+                                    onClick={() => {setSelectedTask(task); setViewOrEdit("edit")}}
+                                    className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >Edit</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                        {selectedTask && (
+                            <TaskDetails 
+                                closeModal={() => {setSelectedTask(null); setViewOrEdit("")}}
+                                fetchTasks={fetchTasks}
+                                getPartName={getPartName}
+                                parts={parts}
+                                viewOrEdit={viewOrEdit}
+                                project={project}
+                                task={selectedTask}
+                                token={token}
+                            />
+                        )}
+                </table>
+                <button onClick={goBack} className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Back</button>
+            </div>
         </div>
     
     )

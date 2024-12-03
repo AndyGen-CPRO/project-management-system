@@ -10,11 +10,14 @@ import ProjectOverview from './components/Projects/ProjectOverviewPage';
 import Parts from './components/Parts/PartsPage';
 import Tasks from './components/Tasks/TasksPage';
 import InboxPage from './components/Inbox/InboxPage';
+import Navbar from './components/Nav/NavBar';
 
 const App = () => {
   return (
     <div>
+      <Navbar />
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
