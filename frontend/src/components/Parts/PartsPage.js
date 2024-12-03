@@ -8,6 +8,7 @@ import PartDetails from './PartDetailsModal';
 const Parts = () => {
     const { state } = useLocation();
     const project = state?.project;
+    const role = state?.role;
     const [parts, setParts] = useState([]);
     const [message, setMessage] = useState("");
     const [createPartModal, setCreatePartModal] = useState(false);
@@ -42,14 +43,20 @@ const Parts = () => {
     const goBack = () => {
         navigate(-1)
     }
-
+    console.log(role)
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Parts</h2>
             {message && <p>{message}</p>}
-            <button onClick={() => setCreatePartModal(true)} class="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create Part</button>
+
+            {role === "Owner" && <button 
+            onClick={() => setCreatePartModal(true)} 
+            class="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow
+             hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Create Part</button>}
+
             {createPartModal && 
                 <CreatePart 
                     closeModal = {() => {setCreatePartModal(false)}}
@@ -60,12 +67,7 @@ const Parts = () => {
             }
 
             {parts.length > 0 ? (
-                <table className="w-full table-auto border-collapse bg-gray-200 shadow-lg rounded-lg">
-                    <thead>
-                        <tr>
-                            <th className="text-2xl font-bold text-gray-800 mb-6 text-center">Part</th>
-                        </tr>
-                    </thead>
+                <table className="w-full table-auto border-collapse shadow-lg rounded-lg">
                     <tbody>
                         {parts.map((part) => (
                             <tr key={part.id}>
@@ -98,6 +100,7 @@ const Parts = () => {
                     project={project}
                     part={selectedPart}
                     token={token}
+                    role={role}
                 />
             )}
             <button onClick={goBack}className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Back</button>

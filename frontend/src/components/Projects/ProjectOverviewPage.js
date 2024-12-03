@@ -22,8 +22,13 @@ const ProjectOverview = () => {
             return;
         }
         fetchProject();
-        fetchMemberRole();
     }, [id]);
+    
+    useEffect(() => {
+        if (project) {
+            fetchMemberRole();
+        }
+    }, [project]);
 
     const fetchProject = async() => {
         try {
@@ -59,13 +64,13 @@ const ProjectOverview = () => {
 
     const partsPage = () => {
         navigate("/project/:id/parts", {
-            state: { project }
+            state: { project, role }
         })
     };
 
     const tasksPage = () => {
         navigate("/project/:id/tasks", {
-            state: { project }
+            state: { project, role }
         })
     }
 
@@ -94,12 +99,14 @@ const ProjectOverview = () => {
                         project={project} 
                         fetchProject={fetchProject} 
                         token={token}
+                        role={role}
                     />}
                 {membersModal &&
                     <ProjectMembers 
                         closeModal={() => {setMembersModal(false)}}
                         project={project}
                         token={token}
+                        role={role}
                     />}
                 </div>
         </div>

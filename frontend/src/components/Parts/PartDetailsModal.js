@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const PartDetails = ({ closeModal,fetchParts, project, part, token }) => {
+const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
     const [editMode, setEditMode] = useState(false);
     const [partTasks, setPartTasks] = useState([]);
     const [name, setName] = useState("");
@@ -109,7 +109,10 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token }) => {
                                 <p>This part has no tasks yet</p>
                             </>
                         )}
-                        <button onClick={editBtn} class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
+                        {role === "Owner" && <button onClick={editBtn} 
+                            class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow
+                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                            focus:ring-offset-2">Edit</button>}
                         {partTasks.length <= 0 && 
                         <button onClick={handleDelete}  class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Delete</button>}
                         <button onClick={closeModal} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300" >Close</button>

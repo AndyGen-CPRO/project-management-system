@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import TaskAssignment from './TaskAssignmentModal';
 
-const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, project, task, token }) => {
+const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, project, task, token, role }) => {
     const [members, setTaskMembers] = useState([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -78,18 +78,22 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                         <strong>Description</strong>
                         
                         <p className="px-4 py-2 text-left text-sm font-semibold text-gray-700">{task.description}</p>
-                        <lable className="block text-gray-700 font-medium mb-1">Due Date:</lable>
+                        <label className="block text-gray-700 font-medium mb-1">Due Date:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">{task.dueDate}</p>
-                        <lable className="block text-gray-700 font-medium mb-1">Priority:</lable>
+                        <label className="block text-gray-700 font-medium mb-1">Priority:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">Priority: {task.priority}</p>
-                        <lable className="block text-gray-700 font-medium mb-1">Status:</lable>
+                        <label className="block text-gray-700 font-medium mb-1">Status:</label>
                         <p className="px-4 py-2 text-sm text-gray-600"> {task.status}</p>
-                        <ul>
+                        <label  className="block text-gray-700 font-medium mb-1">Assigned Members:</label>
+                        <ul className="px-4 py-2 text-sm text-gray-600">
                             {members.map(index => (
                                 <li key={index._id}>{index.userId.displayName}</li>
                             ))}
                         </ul>   
-                        <button onClick={taskAssignmentBtn} class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Assign/Remove Members</button>
+                        {role === "Owner" && <button onClick={taskAssignmentBtn} 
+                            class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
+                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Assign/Remove Members</button>}
                         <button onClick={closeModal} className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                     </div>
                 )}

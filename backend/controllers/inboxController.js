@@ -12,6 +12,15 @@ const sendInvitation = async (req,res) => {
         if (!receiver) {
             return res.status(404).json({ message: "User with inserted email does not exist." })
         }
+
+        const existingInvitation = await Inbox.findOne({ 
+            receiverId: receiver._id,
+            projectId: req.params.projectId
+        });
+
+        if (existingInvitation) {
+            return res.status(400).json({ message: "User has already been invited to this project."})
+        }
         const invitationToken = uuidv4();
 
         const newMessage = new Inbox({

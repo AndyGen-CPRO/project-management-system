@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 
-const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
+const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
     const [editMode, setEditMode] = useState(false);
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState(new Date());
@@ -68,7 +68,10 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token }) => {
                         <p>Status: {project.status}</p>
                         <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
                         
-                        <button onClick={editBtn} class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button> 
+                        {role === "Owner" && <button onClick={editBtn} 
+                            class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow 
+                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Edit</button>}
                         <button onClick={() => closeModal(false)} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                     </>
                 ) : (

@@ -16,11 +16,6 @@ const TaskAssignment = ({closeModal, project, task, token }) => {
 
     const fetchMembers = async () => {
         try {
-            if (!token) {
-                navigate("/login");
-                return;
-            }
-
             const response = await axios.get(`http://localhost:5000/project/${project._id}/members`, {
                 headers: {
                     Authorization: `Bearer ${token}`

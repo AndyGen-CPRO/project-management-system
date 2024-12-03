@@ -8,6 +8,7 @@ import TaskDetails from './TaskDetailsModal';
 const Tasks = () => {
     const { state } = useLocation();
     const project = state?.project;
+    const role = state?.role;
     const [parts, setParts] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [message, setMessage] = useState("");
@@ -73,7 +74,10 @@ const Tasks = () => {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className=" w-2/8 p-8 bg-white shadow-lg rounded-lg">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Tasks</h2>
-                <button onClick={() => setCreateTaskModal(true)} class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create Task</button>
+                {role === "Owner" && <button onClick={() => setCreateTaskModal(true)} 
+                class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow
+                 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Create Task</button>}
                 {createTaskModal && 
                 <CreateTask
                     closeModal={() => setCreateTaskModal(false)}
@@ -107,10 +111,10 @@ const Tasks = () => {
                                     >Details</button></td>
                                 {/* owner role button */}
                                 
-                                <td><button 
+                                {role === "Owner" && <td><button 
                                     onClick={() => {setSelectedTask(task); setViewOrEdit("edit")}}
                                     className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    >Edit</button></td>
+                                    >Edit</button></td>}
                             </tr>
                         ))}
                     </tbody>
@@ -124,6 +128,7 @@ const Tasks = () => {
                                 project={project}
                                 task={selectedTask}
                                 token={token}
+                                role={role}
                             />
                         )}
                 </table>

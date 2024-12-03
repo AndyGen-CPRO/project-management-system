@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { removeToken } from "../../utils/auth";
+import { removeToken, removeRole } from "../../utils/auth";
 
 
 const Navbar = () => {
     const navigate = useNavigate();
     const home = () => {
-        removeToken()
+        removeToken();
+        removeRole();
         navigate('')
     }
 
  return (
-  
    <header className="bg-blue-600 shadow-md">
      <nav className="container mx-auto flex items-center justify-between py-4 px-6">
      <div className="text-white text-lg font-bold">
