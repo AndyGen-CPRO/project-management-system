@@ -65,7 +65,7 @@ const ProjectMembers = ({ closeModal, project, token }) => {
                             <ul>
                             {projMembers.map(member => (
                                 <li key={member._id}>{member.userId.displayName}
-                                 - Joined At {member.JoinedAt} - {member.role}</li>
+                                 - Joined At {member.joinedAt} - {member.role}</li>
                             ))}
                             </ul>
                         </>

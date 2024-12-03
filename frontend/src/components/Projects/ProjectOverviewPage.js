@@ -53,7 +53,6 @@ const ProjectOverview = () => {
         }
     };
 
-
     const goBack = () => {
         navigate("/projects");
     }

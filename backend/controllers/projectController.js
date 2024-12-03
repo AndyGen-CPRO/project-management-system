@@ -36,7 +36,7 @@ const createProject = async (req,res) => {
 const getProjectById = async (req,res) => {
     try{
         const project = await Project.findOne({ 
-            _id: req.params.projectId, userId: req.user.id 
+            _id: req.params.projectId
         });
         if (!project)  return res.status(404).json({message : 'Project not found.'})
         
@@ -54,7 +54,21 @@ const getAllProjects = async(req,res) => {
 
     } catch (error)
     {
-        res.status(500).json({message :' Error retriving projects.',error})
+        res.status(500).json({message :'Error retrieving projects.',error})
+    }
+}
+
+const getAllJoinedProjects = async(req, res) => {
+    try{
+        const joinedProjects = await ProjectMember.find({ userId: req.user.id, role: "Member" })
+
+        const projectIds = joinedProjects.map((joinedProjects) => joinedProjects.projectId);
+
+        const projects = await Project.find({ _id: projectIds })
+
+        res.status(200).json(projects);
+    } catch (error) {
+        res.status(500).json({ message: "Error retrieving joined projects."})
     }
 }
 
@@ -85,6 +99,7 @@ const deleteProject = async(req,res) => {
 module.exports = { 
     createProject,
     getAllProjects,
+    getAllJoinedProjects,
     updateProject,
     deleteProject,
     getProjectById

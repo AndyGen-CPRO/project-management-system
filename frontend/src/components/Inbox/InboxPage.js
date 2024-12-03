@@ -5,33 +5,57 @@ import { getToken } from '../../utils/auth';
 import './Inbox.css' ;
 
 const InboxPage = ()  => {
-const [inbox, setInbox] = useState([]);
-const navigate = useNavigate();
-const token = getToken();
+    const [inbox, setInbox] = useState([]);
+    const navigate = useNavigate();
+    const token = getToken();
 
-useEffect(() => {
-    if (token) {
-        fetchInbox(); 
-    }
-}, [])
-
-const fetchInbox = async(e) => {
-    try {
-        if (!token) {
-            navigate("/login");
-            return;
+    useEffect(() => {
+        if (token) {
+            fetchInbox(); 
         }
+    }, [])
 
-        const response = await axios.get("http://localhost:5000/inbox/", {
-            headers: {
-                Authorization: `Bearer ${token}` 
+    const fetchInbox = async(e) => {
+        try {
+            if (!token) {
+                navigate("/login");
+                return;
             }
-        });
-        setInbox(response.data)
-    } catch (error) {
-        alert("Error fetching user inbox.")
+
+            const response = await axios.get("http://localhost:5000/inbox/", {
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            });
+            setInbox(response.data)
+        } catch (error) {
+            alert("Error fetching user inbox.", error)
+        }
     }
-}
+
+    const handleAccept = async (inviteToken, status) => {
+        try {
+            if (!inviteToken) {
+                alert("Invalid invitation token.")
+                return;
+            }
+            if (status === "accepted") {
+                alert("Invitation already accepted.");
+                return;
+            }
+            const response = await axios.post(
+                `http://localhost:5000/inbox/accept/${inviteToken}`
+                , {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials: true,
+            });
+        } catch(error) {
+            alert("Error accepting invite.", error)
+        }
+    }
+
     return(
         <div>
             <h1>Inbox</h1>
@@ -51,7 +75,7 @@ const fetchInbox = async(e) => {
                         <td>{inbox.body}</td>
                         <td>{inbox.status}</td>
                         <td>{inbox.dateSent}</td>
-                        <td><button>Accept</button></td>
+                        <td><button onClick={() => handleAccept(inbox.invitationToken, inbox.status)}>Accept</button></td>
                     </tr>
                     ))}
                 </tbody>
