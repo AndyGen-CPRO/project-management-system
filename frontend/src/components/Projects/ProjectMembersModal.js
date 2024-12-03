@@ -107,10 +107,13 @@ const ProjectMembers = ({ closeModal, project, token, role }) => {
                                     key={member._id}
                                     className="flex justify-between items-center bg-gray-50 p-2 rounded-lg shadow"
                                 >
-                                    <div>
+                                    <div className="flex-shrink-0">
                                         <p className="font-medium text-gray-800">
                                             {member.userId.displayName}
                                         </p>
+                                    </div>
+
+                                    <div className="text-right">
                                         <p className="text-sm text-gray-600">
                                             Joined At: {new Date(member.joinedAt).toLocaleDateString()}
                                         </p>
