@@ -1,16 +1,21 @@
 const Inbox = require("../models/inboxModel");
-const ProjectMembers = require("../models/projectMemberModel");
+const ProjectMember = require("../models/projectMemberModel");
 const { v4: uuidv4 } = require('uuid');
+const User = require("../models/userModel");
 
-//adds messages 
 const sendInvitation = async (req,res) => {
     try{
-        const { receiverId, title, body } = req.body
+        const { receiverEmail, title, body } = req.body
 
+        const receiver = await User.findOne({ email: receiverEmail })
+
+        if (!receiver) {
+            return res.status(404).json({ message: "User with inserted email does not exist." })
+        }
         const invitationToken = uuidv4();
 
         const newMessage = new Inbox({
-            receiverId,
+            receiverId: receiver._id,
             senderId: req.user.id, //gets userId from the auth token
             projectId : req.params.projectId, //gets from param
             title,
@@ -29,16 +34,21 @@ const acceptInvite = async(req, res) => {
     const { token } = req.params;
 
     try {
-        const invitation = Inbox.findOne({ invitationToken: token });
+        const invitation = await Inbox.findOne({ invitationToken: token });
 
-        if(!invitation) return res.status(404).json({ message: "Invitation token invalid." })
-        
+        if(!invitation) {
+            return res.status(404).json({ message: "Invitation token invalid." })
+        }
+
         const newProjectMember = new ProjectMember({
             projectId: invitation.projectId,
             userId: req.user.id
         });
 
         await newProjectMember.save();
+
+        invitation.status = "accepted";
+        await invitation.save();
 
         res.status(201).json({ message: "Invitation accepted. User added to project."})
     } catch (error) {
@@ -48,9 +58,7 @@ const acceptInvite = async(req, res) => {
 
 const getInbox = async(req,res) => {
     try{
-        
-        const inbox = await Inbox.find({userId: req.user.userId})
-        
+        const inbox = await Inbox.find({ receiverId: req.user.id })
         res.status(200).json(inbox)
     }catch(error)
     {
@@ -58,7 +66,6 @@ const getInbox = async(req,res) => {
     }
 }
  
-
 
  module.exports = {
     sendInvitation,
