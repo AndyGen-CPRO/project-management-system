@@ -86,7 +86,7 @@ const Tasks = () => {
                     parts={parts}
                     token={token}
                 />}
-                <table>
+                {tasks.length > 0 ? (<table>
                     <thead>
                         <tr>
                             <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Part</th>
@@ -131,7 +131,10 @@ const Tasks = () => {
                                 role={role}
                             />
                         )}
-                </table>
+                </table>) :
+                (
+                    <p className="text-gray-500">This project has not task yet.</p>
+                )}
                 <button onClick={goBack} className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Back</button>
             </div>
         </div>

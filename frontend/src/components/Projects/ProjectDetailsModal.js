@@ -52,7 +52,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
     }
 
     return (
-        <div className="modal-overlay">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="modal-content">
                 <div >
                 {!editMode ? ( 

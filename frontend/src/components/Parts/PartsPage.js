@@ -73,13 +73,15 @@ const Parts = () => {
                             <tr key={part.id}>
                                 <td>
                                     <strong className="text-1x1 font-bold text-gray-800 mb-6 text-center">{part.name}</strong>
-                                    {part.description && (
+                                    {part.description ? (
                                         <div>
                                             <ul>
                                                 <label className="block text-gray-700 font-medium mb-1">Description: </label>
                                                 <li className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">{part.description}  </li>
                                             </ul>
                                         </div>
+                                    ) : (
+                                        <p className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"> No description.</p>
                                     )}      
                                 </td>   
                                 <td>

@@ -65,6 +65,25 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
         }
     };
 
+    const handleDelete = async(e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.delete(
+                `http://localhost:5000/project/${project._id}/task/${task._id}`
+                , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials: true,
+            });
+            fetchTasks();
+            closeModal(false);
+            alert("Task deletion successful.")
+        } catch (error) {
+            alert("Task deletion failed.")
+        }
+    };
+
     const taskAssignmentBtn = () => {
         setAssignTask(!assignTask);
     }
@@ -75,8 +94,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                 {viewOrEdit === "view" && (
                     <div>
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{getPartName(task.partId)} : {task.name}</h2>
-                        <strong>Description</strong>
-                        
+                        <label className="block text-gray-700 font-medium mb-1">Description</label>
                         <p className="px-4 py-2 text-left text-sm font-semibold text-gray-700">{task.description}</p>
                         <label className="block text-gray-700 font-medium mb-1">Due Date:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">{task.dueDate}</p>
@@ -90,11 +108,17 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                                 <li key={index._id}>{index.userId.displayName}</li>
                             ))}
                         </ul>   
-                        {role === "Owner" && <button onClick={taskAssignmentBtn} 
-                            class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
+                        {role === "Owner" && <>
+                        <button onClick={taskAssignmentBtn} 
+                            className="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
                             hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                            Assign/Remove Members</button>}
-                        <button onClick={closeModal} className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
+                            Assign/Remove Members</button>
+                        <button onClick={handleDelete}
+                        className="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
+                        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        >Delete Task</button>
+                            </>}
+                        <button onClick={closeModal} className="px-4 py-1 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                     </div>
                 )}
                 {viewOrEdit === "edit" && (
