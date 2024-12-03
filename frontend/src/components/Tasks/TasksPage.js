@@ -103,7 +103,7 @@ const Tasks = () => {
                                 <td className="px-4 py-2 text-sm text-gray-600">{getPartName(task.partId)}</td>
                                 <td className="px-4 py-2 text-sm text-gray-600">{task.name}</td>
                                 <td className="px-4 py-2 text-sm text-gray-600">{task.description}</td>
-                                <td className="px-4 py-2 text-sm text-gray-600">{task.dueDate}</td>
+                                <td className="px-4 py-2 text-sm text-gray-600">{new Date(project.createdAt).toLocaleDateString()}</td>
                                 <td className="px-4 py-2 text-sm text-gray-600">{task.priority}</td>
                                 <td className="px-4 py-2 text-sm text-gray-600">{task.status}</td>
                                 <td><button className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
