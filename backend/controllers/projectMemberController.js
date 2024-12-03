@@ -11,7 +11,7 @@ const addProjectMember = async (req, res) => {
         await newMember.save();
         res.status(201).json(newMember)
     } catch(error) {
-        res.status(400).json({ message: "Error adding member", error });
+        res.status(400).json({ message: "Error adding member. ", error });
     }
 };
 
@@ -22,9 +22,25 @@ const getProjectMembers = async (req, res) => {
         const members = await ProjectMember.find({ projectId }).populate('userId', 'displayName email');
         res.status(200).json(members);
     } catch (error) {
-        res.status(400).json({ message: "Error fetching project members", error });
+        res.status(400).json({ message: "Error fetching project members. ", error });
     }
 };
+
+const getProjectMemberRole = async (req, res) => {
+    try {
+        const { projectId } = req.params;
+
+        const projectMember = await ProjectMember.findOne({
+                projectId, userId: req.user.id
+        })
+
+        const role = projectMember.role;
+
+        res.status(200).json(role);
+    } catch (error) {
+        res.status(400).json({ message: "Error getting member role. ", error });
+    }
+}
 
 const updateMemberRole = async (req, res) => {
     try {
@@ -39,7 +55,7 @@ const updateMemberRole = async (req, res) => {
 
         res.status(200).json({ message: "Member role updated successfully", updatedMember });
     } catch (error) {
-        res.status(400).json({ message: "Error updating member role", error });
+        res.status(400).json({ message: "Error updating member role. ", error });
     }
 };
 
@@ -50,13 +66,14 @@ const removeProjectMember = async (req, res) => {
         await ProjectMember.findOneAndDelete({ projectId, userId });
         res.status(200).json({ message: "Member removed successfully" });
     } catch (error) {
-        res.status(400).json({ message: "Error removing member", error });
+        res.status(400).json({ message: "Error removing member. ", error });
     }
 };
 
 module.exports = {
     addProjectMember,
     getProjectMembers,
+    getProjectMemberRole,
     updateMemberRole,
     removeProjectMember
 }

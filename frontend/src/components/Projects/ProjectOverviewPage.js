@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getToken } from '../../utils/auth';
+import { getToken, setRole, getRole } from '../../utils/auth';
 import ProjectDetails from './ProjectDetailsModal';
 import ProjectMembers from './ProjectMembersModal';
 
 const ProjectOverview = () => {
     const { id } = useParams();
     const [project, setProject] = useState(null);
+    const [projMembers, setProjMembers] = useState([]);
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const [detailsModal, setDetailsModal] = useState(false);
     const [membersModal, setMembersModal] = useState(false);
     const token = getToken();
+    const role = getRole();
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+        fetchProject();
+        fetchMemberRole();
+    }, [id]);
 
     const fetchProject = async() => {
         try {
@@ -28,17 +39,24 @@ const ProjectOverview = () => {
         }
     };
 
+    const fetchMemberRole = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/project/${project._id}/member-role`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setRole(response.data);
+            setMessage("Fetching project members successful.")
+        } catch (error) {
+            setMessage("Error fetching members.")
+        }
+    };
+
+
     const goBack = () => {
         navigate("/projects");
     }
-    
-    useEffect(() => {
-        if (!token) {
-            navigate("/login");
-            return;
-        }
-        fetchProject();
-    }, [id]);
 
     const partsPage = () => {
         navigate("/project/:id/parts", {
