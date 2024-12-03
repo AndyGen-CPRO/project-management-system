@@ -77,6 +77,7 @@ const Tasks = () => {
                 {createTaskModal && 
                 <CreateTask
                     closeModal={() => setCreateTaskModal(false)}
+                    fetchTasks={fetchTasks}
                     project={project}
                     parts={parts}
                     token={token}

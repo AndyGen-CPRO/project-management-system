@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const CreateTask = ({ closeModal, project, parts, token }) => {
+const CreateTask = ({ closeModal, fetchTasks, project, parts, token }) => {
     const [partId, setPartId] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -27,6 +27,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                 },
                 withCredentials: true,
             });
+            fetchTasks();
             setMessage("Task created successfully.")
         } catch (error) {
             setMessage("Task creation failed.")
@@ -72,7 +73,7 @@ const CreateTask = ({ closeModal, project, parts, token }) => {
                             placeholder="C# Final Project"
                             onChange={(e) => setDescription(e.target.value)}
                             required
-                            className="w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="resize-none block w-full px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div>
