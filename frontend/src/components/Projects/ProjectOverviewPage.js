@@ -59,20 +59,22 @@ const ProjectOverview = () => {
     }
 
     return (
-        <div>
-            <h1>{project.name} Overview</h1>
-            <button onClick={() => {setDetailsModal(true)}}>Project Details</button>
-            {detailsModal &&
-                <ProjectDetails 
-                    closeModal={() => {setDetailsModal(false)}} 
-                    project={project} 
-                    fetchProject={fetchProject} 
-                    token={token}
-                />}
-            <button onClick={partsPage}>Parts</button>
-            <button onClick={tasksPage}>Tasks</button>
-            <div>
-            <button onClick={goBack}>Back </button>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+                <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Overview</h1>
+                <button onClick={() => {setDetailsModal(true)}} class="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" >Project Details</button>
+                {detailsModal &&
+                    <ProjectDetails 
+                        closeModal={() => {setDetailsModal(false)}} 
+                        project={project} 
+                        fetchProject={fetchProject} 
+                        token={token}
+                    />}
+                <button onClick={partsPage}class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Parts</button>
+                <button onClick={tasksPage}class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Tasks</button>
+                <div>
+                <button onClick={goBack}className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Back </button>
+                </div>
             </div>
         </div>
     )

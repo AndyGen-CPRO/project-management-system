@@ -11,9 +11,12 @@ const Navbar = () => {
     }
 
  return (
-   <header className="header">
-     <nav className="nav container">
-      <button onClick={home}>Back to Home</button>
+  
+   <header className="bg-blue-600 shadow-md">
+     <nav className="container mx-auto flex items-center justify-between py-4 px-6">
+     <div className="text-white text-lg font-bold">
+      <button className="hover:text-blue-300 transition" onClick={home}>Back to Home</button>
+      </div>
      </nav>
    </header>
  );

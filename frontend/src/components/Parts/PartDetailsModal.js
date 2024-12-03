@@ -83,11 +83,14 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token }) => {
             <div className="modal-content">
                 {!editMode ? (
                     <>
-                        <h2>{part.name}</h2>
-                        <p>{part.description}</p>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{part.name}</h2>
+                        <h3 className='text-center font-bold text-grey'>description</h3>
+                        <p  className="text-1xl text-gray-800 mb-6 text-center">{part.description}</p>
                         {partTasks.length > 0 ? (
                             <div>
-                                <p>Tasks:</p>
+                                <div  class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
+                                <p className="text-1xl font-bold text-gray-800 mb-6 text-center">Tasks:</p>
+                                
                                 <ul>
                                     {partTasks.map(task => (
                                         <li key={task._id}>{task.name}</li>
@@ -100,10 +103,10 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token }) => {
                                 <p>This part has no tasks yet</p>
                             </>
                         )}
-                        <button onClick={editBtn}>Edit</button>
+                        <button onClick={editBtn} class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
                         {partTasks.length <= 0 && 
-                        <button onClick={handleDelete}>Delete</button>}
-                        <button onClick={closeModal}>Close</button>
+                        <button onClick={handleDelete} >Delete</button>}
+                        <button onClick={closeModal} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300" >Close</button>
                     </>
                 ) : (
                     <>
