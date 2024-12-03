@@ -54,25 +54,29 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="modal-content">
-                <div >
+                <div>
                 {!editMode ? ( 
                     <>
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center" >Project Details</h2>
-                        <p >Project Name: {project.name}</p>
-                        <div  class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
-                        <p>Description: {project.description}</p>
-                        <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
-                        <p>Start Date: {project.startDate}</p>
-                        <p>End Date: {project.endDate}</p>
-                        <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
-                        <p>Status: {project.status}</p>
-                        <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
-                        
-                        {role === "Owner" && <button onClick={editBtn} 
-                            class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow 
-                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <label className="block text-gray-700 font-medium mb-1">Project Name:</label>
+                        <p className="px-4 py-2 text-sm text-gray-600">{project.name}</p>
+                        <label className="block text-gray-700 font-medium mb-1">Description:</label>
+                        <p className="px-4 py-2 text-sm text-gray-600">{project.description}</p>
+                        <label className="block text-gray-700 font-medium mb-1">Start Date:</label>
+                        <p className="px-4 py-2 text-sm text-gray-600">{new Date(project.startDate).toLocaleDateString()}</p>
+                        <label className="block text-gray-700 font-medium mb-1">End Date:</label>
+                        <p className="px-4 py-2 text-sm text-gray-600">End Date: {new Date(project.endDate).toLocaleDateString()}</p>
+                        <label className="block text-gray-700 font-medium mb-1">Status:</label>
+                        <p className="px-4 py-2 text-sm text-gray-600">{project.status}</p>
+                                                
+                        <div className="flex space-x-4 mb-6 px-2 pt-3">
+                            {role === "Owner" && 
+                            <button onClick={editBtn} 
+                                class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow 
+                                hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             Edit</button>}
-                        <button onClick={() => closeModal(false)} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
+                            <button onClick={() => closeModal(false)} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
+                        </div>
                     </>
                 ) : (
                     <>
@@ -117,7 +121,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                                     value={description}
                                     placeholder="C# Final Project"
                                     onChange={(e) => setDescription(e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="resize-none w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div >

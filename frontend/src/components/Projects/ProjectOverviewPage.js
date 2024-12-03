@@ -84,12 +84,29 @@ const ProjectOverview = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+            <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg text-center">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Overview</h1>
-                <button onClick={() => {setDetailsModal(true)}} class="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Project Details</button>
-                <button onClick={() => {setMembersModal(true)}} class="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Project Members</button>
-                <button onClick={partsPage} class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Parts</button>
-                <button onClick={tasksPage} class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Tasks</button>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                    <button onClick={() => {setDetailsModal(true)}} 
+                    className="w-full py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-md 
+                    hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+                        Project Details</button>
+                        
+                    <button onClick={() => {setMembersModal(true)}} 
+                    className="w-full py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-md 
+                    hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+                        Project Members</button>
+
+                    <button onClick={partsPage} 
+                    className="w-full py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-md 
+                    hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+                        Parts</button>
+
+                    <button onClick={tasksPage} 
+                    className="w-full py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-md 
+                    hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+                        Tasks</button>
+                </div>
                 <div>
                 <button onClick={goBack} className="px-3 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Back </button>
                 </div>
