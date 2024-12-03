@@ -51,8 +51,10 @@ const CreatePart = ({ closeModal, fetchParts, project, token }) => {
                             className="px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300" type="submit">Create</button>
-                    <button onClick={() => closeModal(false)}className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                    <div className="flex-row space-y-2 mb-2 px-2 pt-3">
+                        <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300" type="submit">Create</button>
+                        <button onClick={() => closeModal(false)}className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>

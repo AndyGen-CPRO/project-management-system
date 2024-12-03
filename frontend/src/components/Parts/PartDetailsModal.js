@@ -109,14 +109,16 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
                                 <p>This part has no tasks yet</p>
                             </>
                         )}
-                        {role === "Owner" && <button onClick={editBtn} 
-                            class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow
-                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                            focus:ring-offset-2">Edit</button>}
-                        {partTasks.length <= 0 && 
-                        <button onClick={handleDelete}  class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Delete</button>}
-                        <button onClick={closeModal} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300" >Close</button>
-                    </>
+                        <div className="flex space-x-2 mb-2 px-2 pt-3">
+                            {role === "Owner" && <button onClick={editBtn} 
+                                class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow
+                                hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                focus:ring-offset-2">Edit</button>}
+                            {partTasks.length <= 0 && 
+                            <button onClick={handleDelete}  class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Delete</button>}
+                            <button onClick={closeModal} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300" >Close</button>
+                        </div>
+                        </>
                 ) : (
                     <>
                     <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Part</h2>
@@ -140,8 +142,10 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
                                 className="px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
-                        <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Save</button>
-                        <button onClick={() => setEditMode(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                        <div className="flex-row space-y-2 mb-2 px-2 pt-3">
+                            <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Save</button>
+                            <button onClick={() => setEditMode(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                        </div>     
                     </form>
                     </>
                 )}

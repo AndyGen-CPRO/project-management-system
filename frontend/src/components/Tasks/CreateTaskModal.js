@@ -95,8 +95,10 @@ const CreateTask = ({ closeModal, fetchTasks, project, parts, token }) => {
                             <option value="high">High</option>
                         </select>
                     </div>
-                    <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Submit</button>
-                    <button onClick={() => closeModal(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                    <div className="flex-row space-y-2 mb-2 px-2 pt-3">
+                        <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Submit</button>
+                        <button onClick={() => closeModal(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>

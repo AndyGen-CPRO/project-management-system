@@ -69,7 +69,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                         <label className="block text-gray-700 font-medium mb-1">Status:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">{project.status}</p>
                                                 
-                        <div className="flex space-x-4 mb-6 px-2 pt-3">
+                        <div className="flex space-x-2 mb-2 px-2 pt-3">
                             {role === "Owner" && 
                             <button onClick={editBtn} 
                                 class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow 
@@ -139,8 +139,10 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                                     <option value="finished">Finished</option>
                                 </select>
                             </div>
-                            <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300"  type="submit">Save</button>
-                            <button onClick={() => setEditMode(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                            <div className="flex-row space-y-2 mb-2 px-2 pt-3">
+                                <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300"  type="submit">Save</button>
+                                <button onClick={() => setEditMode(false)} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                            </div>
                         </form>
                     </>
                 )}

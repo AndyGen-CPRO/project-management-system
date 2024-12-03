@@ -108,17 +108,19 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                                 <li key={index._id}>{index.userId.displayName}</li>
                             ))}
                         </ul>   
-                        {role === "Owner" && <>
-                        <button onClick={taskAssignmentBtn} 
+                        <div className="flex space-x-2 mb-2 px-2 pt-3">
+                            {role === "Owner" && <>
+                            <button onClick={taskAssignmentBtn} 
+                                className="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
+                                hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                Assign/Remove Members</button>
+                            <button onClick={handleDelete}
                             className="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
-                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                            Assign/Remove Members</button>
-                        <button onClick={handleDelete}
-                        className="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
-                        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        >Delete Task</button>
-                            </>}
-                        <button onClick={closeModal} className="px-4 py-1 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
+                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            >Delete Task</button>
+                                </>}
+                            <button onClick={closeModal} className="px-4 py-1 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
+                        </div>
                     </div>
                 )}
                 {viewOrEdit === "edit" && (
@@ -174,8 +176,10 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                                     <option value="complete">Complete</option>
                                 </select>
                             </div>
-                            <button  type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Save</button>
-                            <button  onClick={closeModal} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                            <div className="flex-row space-y-2 mb-2 px-2 pt-3">
+                                <button  type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300">Save</button>
+                                <button  onClick={closeModal} className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
+                            </div>
                         </form>
                     </>
                 )}
