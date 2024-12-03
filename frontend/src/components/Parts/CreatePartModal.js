@@ -30,27 +30,29 @@ const CreatePart = ({ closeModal, fetchParts, project, token }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Create Parts</h2>
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Create Parts</h2>
                 {message && <p>{message}</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label>Part Name:</label>
+                        <label className="block text-gray-700 font-medium mb-1" >Part Name:</label>
                         <input
                             type="text"
                             onChange={(e) => setName(e.target.value)}
                             required
+                            className="px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label>Description: <i>"Optional, but recommended</i></label>
+                        <label className="block text-gray-700 font-medium mb-1">Description: <i>"Optional, but recommended</i></label>
                         <input
                             type="text"
                             placeholder="C# Final Project"
                             onChange={(e) => setDescription(e.target.value)}
+                            className="px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <button type="submit">Create</button>
-                    <button onClick={() => closeModal(false)}>Cancel</button>
+                    <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300" type="submit">Create</button>
+                    <button onClick={() => closeModal(false)}className="w-full py-2 px-4 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-300">Cancel</button>
                 </form>
             </div>
         </div>
