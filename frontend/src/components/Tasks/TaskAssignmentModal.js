@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const TaskAssignment = ({closeModal, project, task, token }) => {
+const TaskAssignment = ({closeModal, fetchTaskMembers, project, task, token }) => {
     const [members, setTaskMembers] = useState([]);
     const [projMembers, setProjMembers] = useState([]);
     const [assignedMember, setAssignedMember] = useState("");
@@ -56,6 +56,7 @@ const TaskAssignment = ({closeModal, project, task, token }) => {
                 },
                 withCredentials: true,
             });
+            fetchTaskMembers();
             setMessage("Task created successfully.")
         } catch (error) {
             setMessage("Task creation failed.")

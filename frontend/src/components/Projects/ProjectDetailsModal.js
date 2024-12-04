@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import ProjectDelete from './ProjectDeleteModal';
 
 const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
     const [editMode, setEditMode] = useState(false);
@@ -9,7 +11,9 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
     const [endDate, setEndDate] = useState(new Date());
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("");
+    const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleUpdate = async(e) => {
         e.preventDefault();
@@ -31,6 +35,26 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
             setMessage("Project update successful.")
         } catch (error) {
             setMessage("Project update failed.")
+        }
+    };
+
+    const handleDelete = async(e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.delete(
+                `http://localhost:5000/projects/${project._id}`
+                , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials: true,
+            });
+            fetchProject();
+            closeModal(false);
+            navigate("/projects")
+            alert("Project deletion successful.")
+        } catch (error) {
+            alert("Project deletion failed.")
         }
     };
 
@@ -65,7 +89,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                         <label className="block text-gray-700 font-medium mb-1">Start Date:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">{new Date(project.startDate).toLocaleDateString()}</p>
                         <label className="block text-gray-700 font-medium mb-1">End Date:</label>
-                        <p className="px-4 py-2 text-sm text-gray-600">End Date: {new Date(project.endDate).toLocaleDateString()}</p>
+                        <p className="px-4 py-2 text-sm text-gray-600">{new Date(project.endDate).toLocaleDateString()}</p>
                         <label className="block text-gray-700 font-medium mb-1">Status:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">{project.status}</p>
                                                 
@@ -75,8 +99,18 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                                 class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow 
                                 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             Edit</button>}
+                            <button onClick={() => setConfirmDeleteModal(true)}
+                                class="px-3 py-1 text-sm font-medium text-white bg-red-600 rounded shadow 
+                                hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            Delete</button>
                             <button onClick={() => closeModal(false)} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                         </div>
+                        {confirmDeleteModal && (
+                            <ProjectDelete 
+                            onConfirm={handleDelete}
+                            onCancel={() => setConfirmDeleteModal(false)}
+                            />
+                        )}
                     </>
                 ) : (
                     <>

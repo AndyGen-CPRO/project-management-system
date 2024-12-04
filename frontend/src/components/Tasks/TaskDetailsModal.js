@@ -186,6 +186,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
 
                 {assignTask && <TaskAssignment 
                     closeModal={() => setAssignTask(false)}
+                    fetchTaskMembers={fetchTaskMembers}
                     project={project}
                     task={task}
                     token={token}
