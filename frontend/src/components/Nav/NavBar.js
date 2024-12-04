@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { removeToken, removeRole } from "../../utils/auth";
-
+import { removeToken, removeRole, getToken } from "../../utils/auth";
 
 const Navbar = () => {
+    const token = getToken();
     const navigate = useNavigate();
     const logOut = () => {
         removeToken();
@@ -20,9 +20,11 @@ const Navbar = () => {
       <div className="text-white text-lg font-bold">
         <button className="hover:text-blue-300 transition" onClick={home}>Home</button>
       </div>
-      <div className="text-white text-lg font-bold">
+      {token && (
+        <div className="text-white text-lg font-bold">
         <button className="hover:text-blue-300 transition" onClick={logOut}>Log Out</button>
       </div>
+      )}
     </nav>
   </header>
  );
