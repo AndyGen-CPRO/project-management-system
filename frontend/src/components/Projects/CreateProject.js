@@ -18,9 +18,9 @@ const CreateProject = () => {
     useEffect(() => {
         if (!token) {
             navigate("/login");
+            alert("This page needs authorization to be accessed.")
             return;
         }
-        console.log("Token:", token);
     });
 
     const handleSubmit = async (e) => {

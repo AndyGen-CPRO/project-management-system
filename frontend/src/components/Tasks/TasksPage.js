@@ -19,6 +19,12 @@ const Tasks = () => {
     const token = getToken();
 
     useEffect(() => {  
+        if (!token) {
+            navigate("/login");
+            alert("This page needs authorization to be accessed.")
+            return;
+        }
+        
         if (project._id) {
             fetchParts();
             fetchTasks();
@@ -27,11 +33,6 @@ const Tasks = () => {
     
     const fetchParts = async () => {
         try {
-            if (!token) {
-                navigate("/login");
-                return;
-            }
-
             const response = await axios.get(`http://localhost:5000/project/${project._id}/parts`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -70,6 +71,13 @@ const Tasks = () => {
         const part = parts.find(p => p._id === partId);
         return part ? part.name : "Unknown Part";
     };
+
+    if(!token || !project) {
+        return(
+            <p>Project Tasks Loading...</p>
+        )
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className=" w-2/8 p-8 bg-white shadow-lg rounded-lg">

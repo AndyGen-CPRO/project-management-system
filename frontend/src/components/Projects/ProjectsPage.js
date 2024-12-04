@@ -18,6 +18,7 @@ const Projects = () => {
             removeRole();
         } else {
             navigate("/login");
+            alert("This page needs authorization to be accessed.")
         }
     }, []);
 
@@ -59,6 +60,12 @@ const Projects = () => {
     const goToInbox = () => {
         navigate("/inbox");
     };
+
+    if(!token) {
+        return (
+            <p>Projects Loading...</p>
+        )
+    }
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">

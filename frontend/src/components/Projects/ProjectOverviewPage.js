@@ -19,6 +19,7 @@ const ProjectOverview = () => {
     useEffect(() => {
         if (!token) {
             navigate("/login");
+            alert("This page needs authorization to be accessed.")
             return;
         }
         fetchProject();

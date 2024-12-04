@@ -11,16 +11,15 @@ const InboxPage = () => {
     useEffect(() => {
         if (token) {
             fetchInbox();
-        }
+        } else {
+            navigate("/login");
+            alert("This page needs authorization to be accessed.")
+            return;
+    }
     }, []);
 
     const fetchInbox = async () => {
         try {
-            if (!token) {
-                navigate("/login");
-                return;
-            }
-
             const response = await axios.get("http://localhost:5000/inbox/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -58,6 +57,12 @@ const InboxPage = () => {
             alert("Error accepting invite.", error);
         }
     };
+
+    if(!token) {
+        return (
+            <p>Inbox Loading...</p>
+        )
+    }
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">
