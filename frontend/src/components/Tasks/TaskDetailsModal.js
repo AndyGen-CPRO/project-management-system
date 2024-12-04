@@ -36,6 +36,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                 }
             });
             setTaskMembers(response.data);
+
         } catch (error) {
             alert("Error Fetching Members");
         }
@@ -97,7 +98,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                         <label className="block text-gray-700 font-medium mb-1">Description</label>
                         <p className="px-4 py-2 text-left text-sm font-semibold text-gray-700">{task.description}</p>
                         <label className="block text-gray-700 font-medium mb-1">Due Date:</label>
-                        <p className="px-4 py-2 text-sm text-gray-600">{task.dueDate}</p>
+                        <p className="px-4 py-2 text-sm text-gray-600">{new Date(task.dueDate).toLocaleDateString()}</p>
                         <label className="block text-gray-700 font-medium mb-1">Priority:</label>
                         <p className="px-4 py-2 text-sm text-gray-600">Priority: {task.priority}</p>
                         <label className="block text-gray-700 font-medium mb-1">Status:</label>

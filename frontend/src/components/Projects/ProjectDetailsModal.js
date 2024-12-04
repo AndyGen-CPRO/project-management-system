@@ -62,8 +62,8 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                         <div  class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
                         <p>Description: {project.description}</p>
                         <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
-                        <p>Start Date: {project.startDate}</p>
-                        <p>End Date: {project.endDate}</p>
+                        <p>Start Date: {new Date(project.startDate).toLocaleDateString()}</p>
+                        <p>End Date: {new Date(project.endDate).toLocaleDateString()}</p>
                         <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
                         <p>Status: {project.status}</p>
                         <div role="list" class="divide-y divide-gray-100 rounded-md border border-gray-300"></div>
