@@ -58,7 +58,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
         }
     };
 
-    const editBtn = () => {
+    const editBtn = () => { //sets the existing data to the input fields on edit mode
         setEditMode(!editMode);
         setName(project.name);
         setStartDate(project.startDate);
@@ -80,6 +80,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
             <div className="modal-content">
                 <div>
                 {!editMode ? ( 
+                    //View Mode
                     <>
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center" >Project Details</h2>
                         <label className="block text-gray-700 font-medium mb-1">Project Name:</label>
@@ -94,6 +95,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                         <p className="px-4 py-2 text-sm text-gray-600">{project.status}</p>
                                                 
                         <div className="flex space-x-2 mb-2 px-2 pt-3">
+                            {/* Edit and Delete buttons are restricted to Owner role only */}
                             {role === "Owner" && 
                             <>
                             <button onClick={editBtn} 
@@ -107,6 +109,8 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                             </>}
                             <button onClick={() => closeModal(false)} class="px-3 py-1 bg-gray-600 text-sm text-white rounded-md shadow-md hover:bg-gray-700 transition duration-300">Close</button>
                         </div>
+                        
+                        {/* Project Delete Confirmation Modal */}
                         {confirmDeleteModal && (
                             <ProjectDelete 
                             onConfirm={handleDelete}
@@ -115,6 +119,7 @@ const ProjectDetails = ({ closeModal, project, fetchProject, token, role }) => {
                         )}
                     </>
                 ) : (
+                    //Edit Mode
                     <>
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Project</h2>
                         {message && <p>{message}</p>}

@@ -69,7 +69,7 @@ const ProjectMembers = ({ closeModal, project, token, role }) => {
                     </button>
                 </div>
 
-                {/* Invitation Form */}
+                {/* Invitation Form for Owner Role only*/}
                 {role === "Owner" && <form onSubmit={handleInvite} className="space-y-4">
                     <div>
                         <label className="block text-gray-700 font-medium mb-2">

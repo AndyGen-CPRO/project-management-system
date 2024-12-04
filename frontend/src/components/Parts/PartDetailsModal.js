@@ -14,6 +14,7 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
         }
     }, [])
 
+    //fetches tasks associated to the selected part
     const fetchTasks = async () => {
         try {
             const response = await axios.get(
@@ -71,9 +72,9 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
         }
     };
 
-    const editBtn = () => {
+    const editBtn = () => { //sets the editMode boolean to the opposite if accessed
         setEditMode(!editMode);
-        setName(part.name);
+        setName(part.name); //sets the existing name and description to the input fields when editing
         setDescription(part.description);
     }
 
@@ -110,6 +111,7 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
                             </>
                         )}
                         <div className="flex space-x-2 mb-2 px-2 pt-3">
+                            {/* Edit and Delete buttons are restricted to Owner role only */}
                             {role === "Owner" && <button onClick={editBtn} 
                                 class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow
                                 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 

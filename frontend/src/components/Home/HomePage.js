@@ -15,6 +15,7 @@ const Home = () => {
           Please sign up or log in to continue:
         </p>
         <div className="space-y-4">
+          {/* Hides register and log in buttons if logged in */}
           {!token ? (
             <>
             <Link to="/register">

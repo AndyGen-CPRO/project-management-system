@@ -7,7 +7,6 @@ const createPart = async (req,res) => {
         const newPart = new Part({
             name,
             description,
-            //percentage,
             projectId: req.params.projectId,
         });
 

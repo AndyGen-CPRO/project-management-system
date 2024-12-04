@@ -4,7 +4,7 @@ import axios from 'axios';
 import TaskAssignment from './TaskAssignmentModal';
 
 const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, project, task, token, role }) => {
-    const [members, setTaskMembers] = useState([]);
+    const [taskMembers, setTaskMembers] = useState([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState(new Date());
@@ -26,6 +26,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
         }
     }, []);
 
+    //fetches the members assigned to a task to be displayed along with the task details
     const fetchTaskMembers = async () => {
         try {
             const response = await axios.get(
@@ -91,6 +92,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
     return (
         <div className="modal-overlay">
             <div className="modal-content">
+                {/* If the user clicked the View Button on the Tasks Page */}
                 {viewOrEdit === "view" && (
                     <div>
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{getPartName(task.partId)} : {task.name}</h2>
@@ -103,9 +105,9 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                         <label className="block text-gray-700 font-medium mb-1">Status:</label>
                         <p className="px-4 py-2 text-sm text-gray-600"> {task.status}</p>
                         <label  className="block text-gray-700 font-medium mb-1">Assigned Members:</label>
-                        {members.length > 0 ? (
+                        {taskMembers.length > 0 ? (
                             <ul className="px-4 py-2 text-sm text-gray-600">
-                                {members.map(index => (
+                                {taskMembers.map(index => (
                                     <li key={index._id}>{index.userId.displayName}</li>
                                 ))}
                             </ul>
@@ -113,6 +115,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                                 <p>No member is assigned to this task yet.</p>
                             )}
                         <div className="flex space-x-2 mb-2 px-2 pt-3">
+                            {/* Task assignment and Delete buttons are restricted to Owner role only */}
                             {role === "Owner" && <>
                             <button onClick={taskAssignmentBtn} 
                                 className="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow 
@@ -127,6 +130,8 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                         </div>
                     </div>
                 )}
+
+                {/* If the user clicked the Edit Button on the Tasks Page */}
                 {viewOrEdit === "edit" && (
                     <>
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Task</h2>
@@ -191,6 +196,7 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                 {assignTask && <TaskAssignment 
                     closeModal={() => setAssignTask(false)}
                     fetchTaskMembers={fetchTaskMembers}
+                    taskMembers={taskMembers}
                     project={project}
                     task={task}
                     token={token}

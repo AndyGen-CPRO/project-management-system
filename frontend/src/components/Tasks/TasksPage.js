@@ -67,7 +67,7 @@ const Tasks = () => {
         navigate(-1)
     }
 
-    const getPartName = (partId) => {
+    const getPartName = (partId) => { //gets the part's name from the fetched parts with the associated part id of a task
         const part = parts.find(p => p._id === partId);
         return part ? part.name : "Unknown Part";
     };
@@ -114,11 +114,13 @@ const Tasks = () => {
                                 <td className="px-4 py-2 text-sm text-gray-600">{new Date(project.createdAt).toLocaleDateString()}</td>
                                 <td className="px-4 py-2 text-sm text-gray-600">{task.priority}</td>
                                 <td className="px-4 py-2 text-sm text-gray-600">{task.status}</td>
+                                {/* Clicking sets the details modal to view mode */}
                                 <td><button className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     onClick={() => {setSelectedTask(task); setViewOrEdit("view")}}
                                     >Details</button></td>
-                                {/* owner role button */}
                                 
+                                {/* Owner Role Button */}
+                                {/* Clicking sets the details modal to edit mode */}
                                 {role === "Owner" && <td><button 
                                     onClick={() => {setSelectedTask(task); setViewOrEdit("edit")}}
                                     className="px-3 py-1 text-sm font-medium text-white bg-green-600 rounded shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -126,6 +128,8 @@ const Tasks = () => {
                             </tr>
                         ))}
                     </tbody>
+                        {/* The Task Details Modal whose state depends on button clicked */}
+                        {/* Passes multiple props that already existed on this page */}
                         {selectedTask && (
                             <TaskDetails 
                                 closeModal={() => {setSelectedTask(null); setViewOrEdit("")}}

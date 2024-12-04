@@ -2,8 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const TaskAssignment = ({closeModal, fetchTaskMembers, project, task, token }) => {
-    const [members, setTaskMembers] = useState([]);
+const TaskAssignment = ({closeModal, fetchTaskMembers, taskMembers, project, task, token }) => {
     const [projMembers, setProjMembers] = useState([]);
     const [assignedMember, setAssignedMember] = useState("");
     const [message, setMessage] = useState([]);
@@ -24,23 +23,9 @@ const TaskAssignment = ({closeModal, fetchTaskMembers, project, task, token }) =
             });
 
             setProjMembers(response.data);
-
             setMessage("Fetching project members successful.")
         } catch (error) {
             setMessage("Error fetching members.")
-        }
-        try {
-            const response = await axios.get( //used to grey out users taht are already in the project
-                `http://localhost:5000/project/${project._id}/task/${task._id}/members`
-                 , {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setTaskMembers(response.data);
-
-        } catch (error) {
-            alert("Error Fetching Members");
         }
     };
 
@@ -73,7 +58,7 @@ const TaskAssignment = ({closeModal, fetchTaskMembers, project, task, token }) =
                     </label>
                     {projMembers.length > 0 ? (
                         projMembers.map((member) => {
-                            const isAssigned = members.some(
+                            const isAssigned = taskMembers.some(
                                 (taskMember) => taskMember.userId._id === member.userId._id
                             );
     

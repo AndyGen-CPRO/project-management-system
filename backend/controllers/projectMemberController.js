@@ -30,6 +30,7 @@ const getProjectMemberRole = async (req, res) => {
     try {
         const { projectId } = req.params;
 
+        //looks for the users data in the project members collection and collects their role
         const projectMember = await ProjectMember.findOne({
                 projectId, userId: req.user.id
         })

@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="text-white text-lg font-bold">
         <button className="hover:text-blue-300 transition" onClick={home}>Home</button>
       </div>
-      {token && (
+      {token && ( //can only be viewed by those that are logged in
         <div className="text-white text-lg font-bold">
         <button className="hover:text-blue-300 transition" onClick={logOut}>Log Out</button>
       </div>

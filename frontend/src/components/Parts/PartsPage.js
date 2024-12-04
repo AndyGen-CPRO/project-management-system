@@ -6,7 +6,7 @@ import CreatePart from './CreatePartModal';
 import PartDetails from './PartDetailsModal';
 
 const Parts = () => {
-    const { state } = useLocation();
+    const { state } = useLocation(); //gets the state passed from project overview
     const project = state?.project;
     const role = state?.role;
     const [parts, setParts] = useState([]);
@@ -22,7 +22,7 @@ const Parts = () => {
             alert("This page needs authorization to be accessed.")
             return;
         }
-        if (project._id) {
+        if (project._id) {  //fetches parts if the project is successfully passed from the project overview
             fetchParts();
         }
     }, []);
@@ -45,7 +45,7 @@ const Parts = () => {
     }
     
     
-    if(!token || !project) {
+    if(!token || !project) { //loads if theres not token or project details passed
         return(
             <p>Project Parts Loading...</p>
         )

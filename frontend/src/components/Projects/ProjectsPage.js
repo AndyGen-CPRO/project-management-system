@@ -12,11 +12,11 @@ const Projects = () => {
     const token = getToken();
 
     useEffect(() => {
-        if (token) {
+        if (token) { //fetches all the project if theres token
             fetchProjects();
             fetchJoinedProjects();
-            removeRole();
-        } else {
+            removeRole(); //removes role when the user leaves a project overview
+        } else {    //redirects user to log in page if theres not token
             navigate("/login");
             alert("This page needs authorization to be accessed.")
         }
@@ -62,7 +62,7 @@ const Projects = () => {
     };
 
     if(!token) {
-        return (
+        return ( //prevents the projects page from completely loading if theres no token at all
             <p>Projects Loading...</p>
         )
     }

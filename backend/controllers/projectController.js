@@ -16,7 +16,8 @@ const createProject = async (req,res) => {
 
         await newProject.save();
 
-        const newProjectMember = new ProjectMember({
+        //forms a new project member data with the project and user id with the role as Owner
+        const newProjectMember = new ProjectMember({ 
             projectId: newProject._id,
             userId: req.user.id,
             role: "Owner"
@@ -58,10 +59,13 @@ const getAllProjects = async(req,res) => {
     }
 }
 
+// get all joined projects
 const getAllJoinedProjects = async(req, res) => {
     try{
+        // first looks in the project member schema for data where the user is a member
         const joinedProjects = await ProjectMember.find({ userId: req.user.id, role: "Member" })
 
+        // gets the project ids to get data on the joined projects
         const projectIds = joinedProjects.map((joinedProjects) => joinedProjects.projectId);
 
         const projects = await Project.find({ _id: projectIds })

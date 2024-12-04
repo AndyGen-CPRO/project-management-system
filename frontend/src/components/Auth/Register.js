@@ -13,7 +13,7 @@ const Register = () => {
 
     useEffect(() => {
         if(userToken){
-            navigate("/projects");
+            navigate("/projects"); //returns the user to the projects page if token is detected
             alert("You are currently logged in.")
             return;
         }
@@ -24,8 +24,8 @@ const Register = () => {
         try {
             const response = await axios.post("http://localhost:5000/auth/register", { displayName, email, password });
             alert("Register successful.");
-            navigate("/login")
-        } catch (error) { // more precises error handing because it feels like this shit breaks every fresh install
+            navigate("/login");
+        } catch (error) { // more precises error handing
             if (error.response) {
                 const {status,data} = error.response
                 switch (status){

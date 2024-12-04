@@ -33,6 +33,7 @@ const InboxPage = () => {
 
     const handleAccept = async (inviteToken, status) => {
         try {
+            //checks for token validity and status before doing the POST request
             if (!inviteToken) {
                 alert("Invalid invitation token.");
                 return;
@@ -58,7 +59,7 @@ const InboxPage = () => {
         }
     };
 
-    if(!token) {
+    if(!token) {    //prevents page from loading if the user is not authenticated
         return (
             <p>Inbox Loading...</p>
         )
@@ -84,6 +85,7 @@ const InboxPage = () => {
                             </tr>
                         </thead>
                         <tbody>
+                            {/* Invitation Details */}
                             {inbox.map((message) => (
                                 <tr key={message._id} className="border-b hover:bg-gray-50">
                                     <td className="px-6 py-4 text-gray-800">{message.title}</td>
@@ -100,6 +102,7 @@ const InboxPage = () => {
                                     <td className="px-6 py-4 text-gray-600">
                                         {new Date(message.dateSent).toLocaleDateString()}
                                     </td>
+                                    {/* The Accept Button */}
                                     <td className="px-6 py-4 text-center">
                                         <button
                                             onClick={() => handleAccept(message.invitationToken, message.status)}

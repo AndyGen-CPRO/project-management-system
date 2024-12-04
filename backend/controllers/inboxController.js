@@ -49,6 +49,7 @@ const acceptInvite = async(req, res) => {
             return res.status(404).json({ message: "Invitation token invalid." })
         }
 
+        //if the invitation exists, gets the project id from the invitation
         const newProjectMember = new ProjectMember({
             projectId: invitation.projectId,
             userId: req.user.id

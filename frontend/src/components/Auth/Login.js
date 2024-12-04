@@ -29,7 +29,7 @@ const Login = () => {
                 const { token } = response.data;
                 setToken(token);
                 setMessage("Log in successful.");
-                navigate("/projects");
+                navigate("/projects"); //goes to projects page after log in
             } else {
                 setMessage("Unknown response from the server.");
             }
