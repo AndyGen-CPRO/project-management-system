@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { getToken, removeToken, removeRole } from "../../utils/auth";
+import { removeToken, removeRole } from "../../utils/auth";
 
 
 const Navbar = () => {
-    const token = getToken();
     const navigate = useNavigate();
-    const home = () => {
+    const logOut = () => {
         removeToken();
         removeRole();
         navigate('')
     }
+    const home = () => {
+      navigate('');
+    }
 
  return (
-   <header className="bg-blue-600 shadow-md">
-     <nav className="container mx-auto flex items-center justify-between py-4 px-6">
-     <div className="text-white text-lg font-bold">
-      {token ? (
-        <button className="hover:text-blue-300 transition" onClick={home}>Log Out</button>
-      ) : (
-      <button className="hover:text-blue-300 transition" onClick={home}>Back to Home</button>)}
+  <header className="bg-blue-600 shadow-md">
+    <nav className="container mx-auto flex items-center justify-between py-4 px-6">
+      <div className="text-white text-lg font-bold">
+        <button className="hover:text-blue-300 transition" onClick={home}>Home</button>
       </div>
-     </nav>
-   </header>
+      <div className="text-white text-lg font-bold">
+        <button className="hover:text-blue-300 transition" onClick={logOut}>Log Out</button>
+      </div>
+    </nav>
+  </header>
  );
 };
 

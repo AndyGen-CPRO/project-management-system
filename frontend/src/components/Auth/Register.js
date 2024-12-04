@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { setToken } from '../../utils/auth';
+import { useNavigate } from 'react-router-dom';
+import { setToken, getToken } from '../../utils/auth';
 
 const Register = () => {
     const [displayName, setDisplayName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const userToken = getToken();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(userToken){
+            navigate("/projects");
+            alert("You are currently logged in.")
+            return;
+        }
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,15 +25,15 @@ const Register = () => {
             const response = await axios.post("http://localhost:5000/auth/register", { displayName, email, password });
             const { token } = response.data;
             setToken(token);
-            setMessage("Register successful.");
+            alert("Register successful.");
+            navigate("/login")
         } catch (error) { // more precises error handing because it feels like this shit breaks every fresh install
             if (error.response) {
                 const {status,data} = error.response
                 switch (status){
                     case 400:
-                        setMessage('Bad request Incorrect information' +data.message);
+                        setMessage('Bad request Incorrect information' + data.message);
                         break;
-
                     case 401:
                         setMessage('Email already in use or unauthrized please log in' + data.message)
                         break;
@@ -30,16 +41,13 @@ const Register = () => {
                         setMessage('Not found' + data.message)
                         break;
                     case 500:
-                        setMessage('Server error: Server unavailable' +data.message)
+                        setMessage('Server error: Server unavailable' + data.message)
                         break;
                     default:
                         setMessage("Unknow Error has occured");
                         break;
-
                 }
             }
-
-            
         }
     };
     

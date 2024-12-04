@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { setToken } from '../../utils/auth';
+import { setToken, getToken } from '../../utils/auth';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const userToken = getToken();
     const navigate = useNavigate();
+    
+    useEffect(() => {
+        if(userToken){
+            navigate("/projects");
+            alert("You are currently logged in.")
+            return;
+        }
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
