@@ -5,6 +5,7 @@ const assignMember = async (req, res) => {
         const taskId = req.params.taskId;
         const { userId } = req.body;
 
+        //checks if member is already assigned to the task
         const memberAssigned = await TaskAssignment.findOne({ taskId, userId });
         if (memberAssigned) {
             return res.status(400).json({ message: "Member is already assigned to this task."})

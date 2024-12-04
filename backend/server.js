@@ -23,10 +23,10 @@ app.use(cors({
     credentials: true, 
 }));
 
-app.use("/auth", authRoutes);
-app.use("/projects", projectRoutes);
-app.use("/project", partRoutes, taskRoutes, projectMemberRoutes, taskAssignmentRoutes)
-app.use("/inbox", inboxRoutes)
+app.use("/auth", authRoutes); //routes to register and log in
+app.use("/projects", projectRoutes); //routes to all related to all projects
+app.use("/project", partRoutes, taskRoutes, projectMemberRoutes, taskAssignmentRoutes) //routes to all related to a project
+app.use("/inbox", inboxRoutes) //routes to inbox
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
