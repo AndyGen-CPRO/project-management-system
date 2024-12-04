@@ -23,8 +23,6 @@ const Register = () => {
         e.preventDefault();
         try {
             const response = await axios.post("http://localhost:5000/auth/register", { displayName, email, password });
-            const { token } = response.data;
-            setToken(token);
             alert("Register successful.");
             navigate("/login")
         } catch (error) { // more precises error handing because it feels like this shit breaks every fresh install

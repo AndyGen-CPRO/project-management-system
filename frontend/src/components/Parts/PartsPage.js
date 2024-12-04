@@ -35,7 +35,7 @@ const Parts = () => {
                 }
             });
             setParts(response.data);
-            setMessage("Fetching project parts successful.")
+            console.log("Fetching project parts successful.")
         } catch (error) {
             setMessage("Error fetching parts.")
         }

@@ -28,6 +28,7 @@ const CreateTask = ({ closeModal, fetchTasks, project, parts, token }) => {
                 withCredentials: true,
             });
             fetchTasks();
+            closeModal();
             setMessage("Task created successfully.")
         } catch (error) {
             setMessage("Task creation failed.")

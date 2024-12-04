@@ -73,8 +73,8 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
 
     const editBtn = () => {
         setEditMode(!editMode);
-        setName(project.name);
-        setDescription(project.description);
+        setName(part.name);
+        setDescription(part.description);
     }
 
     //part detail + parts under it
@@ -124,7 +124,7 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
                     <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Part</h2>
                     <form onSubmit={handleUpdate}>
                         <div>
-                            <label className="block text-gray-700 font-medium mb-1">Project Name:</label>
+                            <label className="block text-gray-700 font-medium mb-1">Part Name:</label>
                             <input
                                 type="text"
                                 value={name}
@@ -139,7 +139,7 @@ const PartDetails = ({ closeModal,fetchParts, project, part, token, role }) => {
                                 type="text"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                className="px-1 py-1 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="resize-none px-3 py-3 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
                         <div className="flex-row space-y-2 mb-2 px-2 pt-3">

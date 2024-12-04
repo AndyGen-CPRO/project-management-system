@@ -66,7 +66,7 @@ const TaskAssignment = ({closeModal, fetchTaskMembers, project, task, token }) =
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h3>Select Members</h3>
+                <h3 className="text-lg font-semibold text-gray-700 mb-3">Select Members</h3>
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">
                         Project Members:

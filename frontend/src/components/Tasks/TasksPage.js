@@ -24,7 +24,7 @@ const Tasks = () => {
             alert("This page needs authorization to be accessed.")
             return;
         }
-        
+
         if (project._id) {
             fetchParts();
             fetchTasks();
@@ -83,8 +83,8 @@ const Tasks = () => {
             <div className=" w-2/8 p-8 bg-white shadow-lg rounded-lg">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{project.name} Tasks</h2>
                 {role === "Owner" && <button onClick={() => setCreateTaskModal(true)} 
-                class="px-4 py-1 text-sm font-bold text-white bg-blue-600 rounded shadow
-                 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                class="px-4 py-1 text-sm font-bold text-white bg-yellow-600 rounded shadow
+                 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
                     Create Task</button>}
                 {createTaskModal && 
                 <CreateTask
@@ -121,7 +121,7 @@ const Tasks = () => {
                                 
                                 {role === "Owner" && <td><button 
                                     onClick={() => {setSelectedTask(task); setViewOrEdit("edit")}}
-                                    className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="px-3 py-1 text-sm font-medium text-white bg-green-600 rounded shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                                     >Edit</button></td>}
                             </tr>
                         ))}

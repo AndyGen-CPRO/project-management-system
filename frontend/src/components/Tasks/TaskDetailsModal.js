@@ -103,11 +103,15 @@ const TaskDetails = ({ closeModal, fetchTasks, getPartName, parts, viewOrEdit, p
                         <label className="block text-gray-700 font-medium mb-1">Status:</label>
                         <p className="px-4 py-2 text-sm text-gray-600"> {task.status}</p>
                         <label  className="block text-gray-700 font-medium mb-1">Assigned Members:</label>
-                        <ul className="px-4 py-2 text-sm text-gray-600">
-                            {members.map(index => (
-                                <li key={index._id}>{index.userId.displayName}</li>
-                            ))}
-                        </ul>   
+                        {members.length > 0 ? (
+                            <ul className="px-4 py-2 text-sm text-gray-600">
+                                {members.map(index => (
+                                    <li key={index._id}>{index.userId.displayName}</li>
+                                ))}
+                            </ul>
+                            ) : (
+                                <p>No member is assigned to this task yet.</p>
+                            )}
                         <div className="flex space-x-2 mb-2 px-2 pt-3">
                             {role === "Owner" && <>
                             <button onClick={taskAssignmentBtn} 
